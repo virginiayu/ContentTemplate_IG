@@ -1,6 +1,8 @@
 function contentProcessor(query){
-    
-    // return empty & unbonuded template
+    // input field validation
+    // create json suit for template
+    // bind json into template
+    // retrun text
 }
 
 // eport module

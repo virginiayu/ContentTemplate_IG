@@ -30,6 +30,8 @@ app.get("/submit-form", function(req, res){
     console.log(req.query);
 
     //call template function from another file
+    // call the contentProcessor
+    // print the result into textarea
     
     // res.send(req.query + "<br><br> " + req.body);
     res.redirect('/result.html');

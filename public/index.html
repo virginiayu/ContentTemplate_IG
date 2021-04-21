@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Content Template</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+
+<div class="container">
+    <form class="block1" action="/submit-form"  method="GET" >
+        <div class="row">
+            <div class="col">
+                <h4>Content Generateor</h4>
+                <p>A quick content generator for IG post</p>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputType" class="col-4 col-form-label">Type</label>
+            <div class="col-8">
+                <select id="designType" name="designType" class="form-control ">
+                    <option value="-1">Please Select</option>
+                    <option value="design-fullball">全珠款</option>
+                    <option value="design-metalic">彎管款</option>
+                    <option value="design-light">輕設計</option>
+                    <option value="design-revamp">重製款</option>
+                    <option value="design-customerise">客製款</option>
+                    <option value="promotion">宣傳</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPtdCode" class="col-4 col-form-label">Product Code</label>
+            <div class="col-8">
+                <input class="form-control" id="inputPtdCode" name="inputPtdCode" placeholder="Product Code">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPrice" class="col-4 col-form-label">Price</label>
+            <div class="col-8">
+                <input class="form-control" id="inputPrice" name="inputPrice" placeholder="Price">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputComment" class="col col-form-label">Comments</label>
+            <div class="col">
+                <textarea class="form-control" id="inputComment" name="inputComment" placeholder="Comments"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-title-row">
+                    <p style="display: inline-block;">Material List</p>
+                    <!-- <button type="button" id="addRowBtn" class="btn btn-light d-inline-block addRowBtn" onclick="addNewRow();"> + </button> -->
+                </div>
+                <table  class="table table-striped" id="materialTable" >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Size (mm)</th>
+                            <!-- <th scope="col"> </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><input type="text" class="form-control tableInputText" name="levels[0][name]"></td>
+                            <td><input type="text" class="form-control tableInputText" name="levels[0][size]"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td><input type="text" class="form-control tableInputText" name="levels[1][name]"></td>
+                            <td><input type="text" class="form-control tableInputText" name="levels[1][size]"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td><input type="text" class="form-control tableInputText" name="levels[2][name]"></td>
+                            <td><input type="text" class="form-control tableInputText" name="levels[2][size]"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td><input type="text" class="form-control tableInputText" name="levels[3][name]"></td>
+                            <td><input type="text" class="form-control tableInputText" name="levels[3][size]"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col ">
+                <input type="submit" id="SubmitBtn" class="btn btn-primary" value=" Submit " />
+            </div>
+        </div>
+    </form>
+   
+
+    <div class="row">
+        <div class="col"></div>
+    </div>
+
+</div>
+
+</body>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+</html>

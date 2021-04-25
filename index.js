@@ -31,13 +31,13 @@ app.get("/", function(req, res){
 });
 app.get("/submit-form", function(req, res){
     var query = req.query;
-    console.log("query:", query);
+    // console.log("query:", query);
     // bind template
     // var html = dataHandling(query);
     let temp = dataHandling(query);
     let html = ejs.renderFile(path.join(__dirname, 'views/template_normal.ejs'), temp, {} , function(err, str){
         // str => Rendered HTML string
-        console.log(err);
+        if (err) console.log(err, err);
         // print the result into textarea
         res.render('result', {"output": str});    
     });

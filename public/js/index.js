@@ -1,3 +1,12 @@
+$( document ).ready(function() {
+    $.getJSON('data/autoComplete.json', function(data) {
+        // JSON result in `data` variable
+        $( "#category" ).autocomplete({
+            source: data,
+        });
+    });
+});
+
 function addNewRow() {
     var $html = 
     '<tr>'

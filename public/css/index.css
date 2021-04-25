@@ -65,3 +65,7 @@ td input[type="text"] {
 /*     margin-right: 8px; */
 }
 
+
+.required {
+    color: red;
+}

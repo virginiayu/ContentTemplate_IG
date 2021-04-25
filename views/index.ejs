@@ -1,109 +1,128 @@
 <% layout('layout') %>
 
-        <form class="block1" action="/submit-form"  method="GET" >
-            <div class="form-group row">
-                <label for="inputType" class="col col-form-label">Type</label>
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="type" id="type_bracelet" value="bracelet">
-                        <label class="form-check-label" for="type_bracelet">手串</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="type" id="type_pendant" value="pendant">
-                        <label class="form-check-label" for="type_pendant">吊墜</label>
-                    </div>
+    <form class="block1" action="/submit-form"  method="GET" >
+        <div class="form-group row">
+            <label for="inputType" class="col col-form-label" >Type <span class="required">*</span></label>
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_bracelet" value="手串" checked>
+                    <label class="form-check-label" for="type_bracelet">手串</label>
                 </div>
+                <!-- 
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_pendant" value="吊墜">
+                    <label class="form-check-label" for="type_pendant">吊墜</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_keychain" value="萬能扣">
+                    <label class="form-check-label" for="type_keychain">萬能扣</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_ring" value="戒指">
+                    <label class="form-check-label" for="type_ring">戒指</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_column" value="晶柱">
+                    <label class="form-check-label" for="type_column">晶柱</label>
+                </div>
+                -->
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label for="inputPtdCode" class="col-4 col-form-label">Uniqueness</label>
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_one" value="oneforone">
-                        <label class="form-check-label" for="uniqueness_one">一物一圖</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_random" value="random">
-                        <label class="form-check-label" for="uniqueness_random">隨機發貨</label>
-                    </div>
+        <div class="form-group row">
+            <label for="inputPtdCode" class="col-4 col-form-label">Uniqueness <span class="required">*</span></label>
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_one" value="一物一圖" checked>
+                    <label class="form-check-label" for="uniqueness_one">一物一圖</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_random" value="隨機發貨">
+                    <label class="form-check-label" for="uniqueness_random">隨機發貨</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_random" value="一貼多物">
+                    <label class="form-check-label" for="uniqueness_random">一貼多物</label>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="ptdCode" class="col col-form-label">Product Code</label>
-                <div class="col">
-                    <input class="form-control" id="ptdCode" name="ptdCode" placeholder="Product Code" type="text">
-                </div>
+        </div>
+        <!-- div class="form-group row">
+            <label for="ptdCode" class="col col-form-label">Code</label>
+            <div class="col">
+                <input class="form-control" id="ptdCode" name="ptdCode" placeholder="Product Code" type="text">
             </div>
-            <div class="form-group row">
-                <label for="ptdName" class="col col-form-label">Product Name</label>
-                <div class="col">
-                    <input class="form-control" id="ptdName" name="ptdName" placeholder="Product Name" type="text">
-                </div>
+        </div-->
+        <div class="form-group row">
+            <label for="ptdName" class="col col-form-label">Special Name</label>
+            <div class="col">
+                <input class="form-control" id="ptdName" name="ptdName" placeholder="Product Name" type="text">
             </div>
-            <div class="form-group row">
-                <label for="comment" class="col col-form-label">Comments</label>
-                <div class="col">
-                    <textarea class="form-control" id="comment" name="comment" placeholder="Comments"></textarea>
-                </div>
+        </div>
+        <div class="form-group row">
+            <label for="category" class="col col-form-label">Category</label>
+            <div class="col">
+                <input class="form-control" id="category" name="category" placeholder="Type Category" type="text">
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="table-title-row">
-                        <label for="inputComment" class="col col-form-label">Material List</label>
-                        <!-- <button type="button" id="addRowBtn" class="btn btn-light d-inline-block addRowBtn" onclick="addNewRow();"> + </button> -->
-                    </div>
-                    <table  class="table table-striped" id="materialTable" >
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Size (mm)</th>
-                                <th scope="col">Price</th>
-                                <!-- <th scope="col"> </th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td><input type="text" class="form-control tableInputText" name="item[0][name]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[0][size]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[0][price]" type="text"></td>
-                                <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td><input type="text" class="form-control tableInputText" name="item[1][name]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[1][size]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[1][price]" type="text"></td>
-                                <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td><input type="text" class="form-control tableInputText" name="item[2][name]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[2][size]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[2][price]" type="text"></td>
-                                <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td><input type="text" class="form-control tableInputText" name="item[3][name]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[3][size]" type="text"></td>
-                                <td><input type="text" class="form-control tableInputText" name="item[3][price]" type="text"></td>
-                                <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
-                            </tr>
-                        </tbody>
-                    </table>
-                            
-                </div>
+        </div>
+        <div class="form-group row">
+            <label for="comment" class="col col-form-label">Comments</label>
+            <div class="col">
+                <textarea class="form-control" id="comment" name="comment" placeholder="Comments"></textarea>
             </div>
-            <div class="row">
-                <div class="col ">
-                    <input type="submit" id="SubmitBtn" class="btn btn-primary" value=" Submit " />
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-title-row">
+                    <label for="inputComment" class="col col-form-label">Item List</label>
+                    <!-- <button type="button" id="addRowBtn" class="btn btn-light d-inline-block addRowBtn" onclick="addNewRow();"> + </button> -->
                 </div>
+                <table  class="table table-striped" id="materialTable" >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Size (mm)</th>
+                            <th scope="col">Price</th>
+                            <!-- <th scope="col"> </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><input type="text" class="form-control tableInputText" name="items[0][size]" type="text"></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[0][price]" type="text"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td><input type="text" class="form-control tableInputText" name="items[1][size]" type="text"></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[1][price]" type="text"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td><input type="text" class="form-control tableInputText" name="items[2][size]" type="text"></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[2][price]" type="text"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td><input type="text" class="form-control tableInputText" name="items[3][size]" type="text"></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[3][price]" type="text"></td>
+                            <!-- <td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                        
             </div>
-        </form>
+        </div>
+        <div class="row">
+            <div class="col ">
+                <input type="submit" id="SubmitBtn" class="btn btn-primary" value=" Submit " />
+            </div>
+        </div>
+    </form>
 
 
-        <!-- <div class="row">
-            <div class="col"></div>
-        </div> -->
+    <!-- <div class="row">
+        <div class="col"></div>
+    </div> -->

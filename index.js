@@ -3,9 +3,10 @@
  */
 const express = require('express');
 const path = require("path");
+const ejs = require('ejs');
 const engine = require('ejs-locals');
 
-// const contentProcessor = require('./main');
+const dataHandling = require('./main');
 
 /**
  * App Variables
@@ -20,7 +21,7 @@ app.engine('ejs', engine);
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
-app.use('/', express.static(path.join(__dirname, "public")));
+app.use( express.static(path.join(__dirname, "public")));
 
 /**
  * Routes Definitions
@@ -31,11 +32,15 @@ app.get("/", function(req, res){
 app.get("/submit-form", function(req, res){
     var query = req.query;
     console.log("query:", query);
-
     // bind template
-    // print the result into textarea
-    res.render('result', {"output": "123"});
-    // res.redirect('result.html');
+    // var html = dataHandling(query);
+    let temp = dataHandling(query);
+    let html = ejs.renderFile(path.join(__dirname, 'views/template_normal.ejs'), temp, {} , function(err, str){
+        // str => Rendered HTML string
+        console.log(err);
+        // print the result into textarea
+        res.render('result', {"output": str});    
+    });
 });
 
 /**

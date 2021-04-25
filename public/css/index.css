@@ -1,39 +1,44 @@
 /*  ### overwrite styles*/
 .container {
     max-width: 768px;
-    min-width: 320px;
+    min-width: 280px;
 }
 
 textarea {
     resize: none;
-    width: calc(100% - 17px);
-    padding-left: 10px;
+    /* width: calc(100% - 17px); */
+    width: 100%;
+    /* padding-left: 10px; */
     border-radius: 4px;
 }
 
 .col-form-label {
     display: inline-block;
+    font-weight: 600;
 }
 
 table input[type="text"] {
     margin-bottom: 0px;
-    
 }
 
-td:first-of-type input {
+td input[type="text"] {
     max-width: 100px;
-}
-td:nth-of-type(2) input {
-    max-width: 100px;
-    background-color: #fff;
 }
 
-.form-group.row input {
-    width: calc(100% - 23px);
+.form-group.row input[type="text"] {
+    /* width: calc(100% - 20px); */
+    width: 100%;
     border: 1px solid #cccccc;
     border-radius: 4px;
 }
 
+.form-check-label {
+    display: inline-block;
+}
+
+.form-check-inline {
+    display: inline;
+}
 /* .form-group.row > div[class^="col"]{
     display:inline-block;
 }
@@ -43,12 +48,12 @@ td:nth-of-type(2) input {
     width: 100% ;
 }
 
-#inputPrice,
+/* #inputPrice,
 #inputPtdCode {
     margin-bottom: 8px;
     padding-left: 9px;
     padding-right: 9px;
-}
+} */
 
 .submitBtn {
     margin-left: auto;

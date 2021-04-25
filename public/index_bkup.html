@@ -16,38 +16,70 @@
 <body>
 
 <div class="container">
-    <form class="block1" action="/submit-form"  method="GET" >
-        <div class="row">
-            <div class="col">
-                <h4>Content Generateor</h4>
-                <p>A quick content generator for IG post</p>
-            </div>
+    <div class="row">
+        <div class="col">
+            <h4>Content Generateor</h4>
+            <p>A quick content generator for IG post</p>
         </div>
+    </div>
 
+    <form class="block1" action="/submit-form"  method="GET" >
         <div class="form-group row">
-            <label for="inputType" class="col-4 col-form-label">Type</label>
-            <div class="col-8">
-                <select id="designType" name="designType" class="form-control ">
+            <label for="inputType" class="col col-form-label">Type</label>
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="designType" id="designType_fulball" value="fullball">
+                    <label class="form-check-label" for="designType_fulball">全珠款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="designType" id="designType_metalic" value="metailc">
+                    <label class="form-check-label" for="designType_metalic">彎管款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="designType" id="designType_light" value="light" >
+                    <label class="form-check-label" for="designType_light">輕設計</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="designType" id="designType_customerise" value="customerise">
+                    <label class="form-check-label" for="designType_customerise">客製款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="designType" id="designType_normal" value="normal">
+                    <label class="form-check-label" for="designType_normal">手串</label>
+                </div>
+                <!-- <select id="designType" name="designType" class="form-control ">
                     <option value="-1">Please Select</option>
                     <option value="design-fullball">全珠款</option>
                     <option value="design-metalic">彎管款</option>
                     <option value="design-light">輕設計</option>
-                    <option value="design-revamp">重製款</option>
                     <option value="design-customerise">客製款</option>
-                    <option value="promotion">宣傳</option>
-                </select>
+                </select> -->
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputPtdCode" class="col-4 col-form-label">Uniqueness</label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="form-check-input" id="1for1" name="uniqueness">
+                <label class="form-check-label" for="1for1">一物一圖</label>
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPtdCode" class="col-4 col-form-label">Product Code</label>
             <div class="col-8">
-                <input class="form-control" id="inputPtdCode" name="inputPtdCode" placeholder="Product Code">
+                <input class="form-control" id="inputPtdCode" name="inputPtdCode" placeholder="Product Code" type="text">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPtdCode" class="col-4 col-form-label">Product Name</label>
+            <div class="col-8">
+                <input class="form-control" id="inputPtdName" name="inputPtdName" placeholder="Product CName" type="text">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPrice" class="col-4 col-form-label">Price</label>
             <div class="col-8">
-                <input class="form-control" id="inputPrice" name="inputPrice" placeholder="Price">
+                <input class="form-control" id="inputPrice" name="inputPrice" placeholder="HKD" type="text">
             </div>
         </div>
         <div class="form-group row">
@@ -59,7 +91,8 @@
         <div class="row">
             <div class="col">
                 <div class="table-title-row">
-                    <p style="display: inline-block;">Material List</p>
+                    <label for="inputComment" class="col col-form-label">Material List</label>
+
                     <!-- <button type="button" id="addRowBtn" class="btn btn-light d-inline-block addRowBtn" onclick="addNewRow();"> + </button> -->
                 </div>
                 <table  class="table table-striped" id="materialTable" >

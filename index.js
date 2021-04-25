@@ -3,7 +3,9 @@
  */
 const express = require('express');
 const path = require("path");
-// const main = require("main.js");
+const engine = require('ejs-locals');
+
+// const contentProcessor = require('./main');
 
 /**
  * App Variables
@@ -14,27 +16,26 @@ const port = process.env.PORT || "8000";
 /**
  *  App Configuration
  */
-// app.set("views", path.join(__dirname, "views"));
-// app.set('view engine', 'pug');
+app.engine('ejs', engine);
+app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, "public")));
-// app.use('/', express.static(__dirname + 'public'));
+app.use('/', express.static(path.join(__dirname, "public")));
 
 /**
  * Routes Definitions
  */
-// app.get("/", function(req, res){
-// });
+app.get("/", function(req, res){
+    res.render('index');
+});
 app.get("/submit-form", function(req, res){
-    console.log("query");
-    console.log(req.query);
+    var query = req.query;
+    console.log("query:", query);
 
-    //call template function from another file
-    // call the contentProcessor
+    // bind template
     // print the result into textarea
-    
-    // res.send(req.query + "<br><br> " + req.body);
-    res.redirect('/result.html');
+    res.render('result', {"output": "123"});
+    // res.redirect('result.html');
 });
 
 /**

@@ -1,10 +1,14 @@
 $( document ).ready(function() {
-    $.getJSON('data/autoComplete.json', function(data) {
+    $.getJSON('data/namelist.json', function(data) {
         // JSON result in `data` variable
         $( "#category" ).autocomplete({
             source: data,
         });
     });
+
+    $("#home").html($("#nonDesignTemplate").html());
+    $("#design").html($("#designTemplate").html());
+
 });
 
 function addNewRow() {
@@ -31,6 +35,11 @@ function removeRow($rowBtn){
         $($rowBtn).parents("tr").remove();
     }
 }
+
+function emptyRow(btnElm){
+    $(btnElm).parent().parent().find('input').val('');
+}
+
 function copyToBoard(){
     /* Get the text field */
     var $copyText = document.getElementById("resultBox");

@@ -27,7 +27,7 @@ app.use( express.static(path.join(__dirname, "public")));
  * Routes Definitions
  */
 app.get("/", function(req, res){
-    res.render('index');
+    // res.render('index');
 });
 app.get("/submit-form", function(req, res){
     var query = req.query;
@@ -41,6 +41,11 @@ app.get("/submit-form", function(req, res){
         // print the result into textarea
         res.render('result', {"output": str});    
     });
+});
+
+app.get("/dataProcessor", function(req, res){
+    var data = req.query;
+    res.send(data);
 });
 
 /**

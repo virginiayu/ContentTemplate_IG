@@ -5,14 +5,15 @@ const express = require('express');
 const path = require("path");
 const ejs = require('ejs');
 const engine = require('ejs-locals');
+const fs = require('fs')
 
-const dataHandling = require('./main');
+const dataHandling = require('./dataHandling');
 
 /**
  * App Variables
  */
 const app = express();
-const port = process.env.PORT || "8000";
+const port = process.env.PORT || "3000";
 
 /**
  *  App Configuration
@@ -21,36 +22,49 @@ app.engine('ejs', engine);
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
-app.use( express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 /**
  * Routes Definitions
  */
-app.get("/", function(req, res){
+app.get("/", function(req, res) {
     // res.render('index');
 });
-app.get("/submit-form", function(req, res){
-    var query = req.query;
-    // console.log("query:", query);
-    // bind template
-    // var html = dataHandling(query);
+// for non-design form submission
+app.post("/submit_form_non_design", function(req, res) {
+    var query = req.body; // req.query;
+
+    // data process
     let temp = dataHandling(query);
-    let html = ejs.renderFile(path.join(__dirname, 'views/template_normal.ejs'), temp, {} , function(err, str){
-        // str => Rendered HTML string
-        if (err) console.log(err, err);
-        // print the result into textarea
-        res.render('result', {"output": str});    
-    });
+    console.log('after data dataHandling:', temp);
+    console.log("-------");
+
+    // bind template
+    const templatePath = path.join(__dirname, 'views/template_normal.ejs');
+    // return promise object
+    // let html = ejs.renderFile(templatePath, temp);
+    // console.log(html);
+    // console.log("-------");
+
+    // return plain text
+    var template = fs.readFileSync(templatePath, 'utf-8');
+    let html2 = ejs.render(template, temp);
+    console.log(html2);
+
+    // res.json({"data": html2});
+    res.send(html2);
+    // res.redirect('.');
 });
 
-app.get("/dataProcessor", function(req, res){
-    var data = req.query;
+// for design form submission
+app.post("/submit_form_design", function(req, res) {
+    var data = req.body;
     res.send(data);
 });
 
 /**
  * Server Activation
  */
-app.listen(port, function(){
+app.listen(port, function() {
     console.log("server is running");
 });

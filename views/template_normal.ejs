@@ -1,13 +1,26 @@
-[On Sale] <%= uniqueness %> <%= ptdName%>
-.<%= comment %><% items.forEach(function(item){ %><% if (item.size && item.price) { %><%= item.size %>mm HKD $<%= item.price %><% } %><% }); %>
-相關商品：👉🏻 #lgw_<%= category %>
-.<%= functions %>
-DM下單
-自然光拍攝
-平郵包郵 | 金剛/順豐到付
+[On Sale] [<%= uniqueness %>] #<%= (specialName)? specialName : category  %>
+.
+<% items.forEach(function(item){ 
+    if (item.size && item.price) { %>
+    <% if (item.code) { %>
+        <%= item.code %>
+    <% } %>
+    <% if (item.wrist) { %>
+        手圍 <%= item.wrist %>cm
+    <% } %>
+        尺寸 <%= item.size %>mm 
+        HKD $<%= item.price %>
+    <% }
+}); %>
 可免費改手圍（下單時請揚聲）
 .
+相關商品：👉🏻 #lgw_<%= category %>
+.
+自然光拍攝
+DM下單
+平郵包郵 | 金剛/順豐到付
+.
 #水晶手鏈 #水晶手鍊 #水晶手串
-<% nicknames.forEach(function(name){ %>    
-    #<%= name %> #<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串 
-<% }); %>
+<%if (category) {%>
+#<%= category %>手鏈 #<%= category %>手鍊 #<%= category %>手串 
+<% } %>

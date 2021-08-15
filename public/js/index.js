@@ -13,20 +13,23 @@ $( document ).ready(function() {
     });
 
     //form submit handling
-    $('#form_non_design').submit(function(){
-        $.ajax({
-            url     : $('#form_non_design').attr('action'),
-            type    : $('#form_non_design').attr('method') || 'GET',
-            data    : $('#form_non_design').serialize(),
-            success : function(res){
-                alert('form submitted.', res);
-            }
-        });
-        return false;
+    $('.normalSubmitBtn').on('click', function(e){
+        $.post( 
+            '/submit_normal_form', 
+            $('.form_normal').serializeArray() , 
+            function( res ) {
+                if(res) {
+                    $("#resultTextarea").html(res.data);
+                    $("#result-tab").click();
+                }
+                else {
+                    alert("empty response");
+                }
+            },
+        "json");
     });
-
+  
 });
-
 
 function emptyRow(btnElm){
     $(btnElm).parent().parent().find('input').val('');
@@ -34,17 +37,18 @@ function emptyRow(btnElm){
 
 function copyToBoard(){
     /* Get the text field */
-    var $copyText = document.getElementById("resultBox");
+    var copyText = document.getElementById("resultTextarea");
+    copyText.focus();
     /* Select the text field */
-    $copyText.select();
-    $copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
     /* Copy the text inside the text field */
     document.execCommand("copy");
 
     /* Alert the copied text */
     alert("Copied!" );
-    console.log("Copied!", $copyText);
+    console.log("Copied!", copyText);
 }
 
 

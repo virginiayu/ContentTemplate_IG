@@ -18,6 +18,9 @@
     
     <!-- <link rel="stylesheet" href="/css/index.css"> -->
     <style>
+        body, .form-control, .btn{
+            font-size: 0.9rem;
+        }
         .container{
             min-width: 320px;
         }
@@ -26,6 +29,9 @@
         }
         .form-check-label{
             cursor: pointer;
+        }
+        .form-control{
+            min-width: 80px;
         }
         .tab-pane.fade:not(.show){
             height: 0;
@@ -50,7 +56,6 @@
 </head>
 
 <body>
-
 <div class="container">
     <!-- <div class="row">
         <div class="col"></div>
@@ -79,9 +84,9 @@
                 <div class="tab-pane fade show active" id="normal" role="tabpanel" aria-labelledby="normal-tab"></div>
                 <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab"></div>
                 <div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
-                    <button class="btn btn-secondary  btn-sm mb-2" onclick="copyToBoard">Copy to Clipboard</button>
+                    <button class="btn btn-secondary  btn-sm mb-2" onclick="copyToBoard()">Copy to Clipboard</button>
                     <textarea id="resultTextarea" class="mb-2"></textarea>
-                    <button class="btn btn-secondary  btn-sm " onclick="copyToBoard">Copy to Clipboard</button>
+                    <button class="btn btn-secondary  btn-sm " onclick="copyToBoard()">Copy to Clipboard</button>
                 </div>
             </div>
         </div>
@@ -90,7 +95,7 @@
 
 
 <template id="nonDesignTemplate">
-<form class="form_non_design" action="/submit_form_non_design"  method="POST" >
+<form class="form_normal" action="/submit_normal_form" method="POST">
     <!-- type -->
     <div class="form-group row">
         <label for="inputType" class="col-4 col-form-label" >Type <span class="required">*</span></label>
@@ -188,7 +193,7 @@
                         <td><input type="text" class="form-control tableInputText" name="items[0][size]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][wrist]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button" class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">2</td>
@@ -196,7 +201,7 @@
                         <td><input type="text" class="form-control tableInputText" name="items[1][size]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[1][wrist]"step="0.1" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[1][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">3</td>
@@ -204,7 +209,7 @@
                         <td><input type="text" class="form-control tableInputText" name="items[2][size]"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[2][wrist]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[2][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">4</td>
@@ -212,14 +217,14 @@
                         <td><input type="text" class="form-control tableInputText" name="items[3][size]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[3][wrist]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[3][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     
-    <input type="submit" id="SubmitBtn" class="btn btn-primary" value=" Submit " />
+    <input type="button" class="btn btn-primary normalSubmitBtn" value=" Submit " />
 </form>
 </template>
 
@@ -356,7 +361,7 @@
                         <td><input type="text" class="form-control tableInputText materialUsed" name="items[0][type]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][size]"step="0.1" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">2</td>
@@ -364,7 +369,7 @@
                         <td><input type="text" class="form-control tableInputText materialUsed" name="items[1][type]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[1][size]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[1][price]" "></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">3</td>
@@ -372,7 +377,7 @@
                         <td><input type="text" class="form-control tableInputText materialUsed" name="items[2][type]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[2][size]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[2][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">4</td>
@@ -380,7 +385,7 @@
                         <td><input type="text" class="form-control tableInputText materialUsed" name="items[3][type]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[3][size]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[3][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                     <tr>
                         <td scope="row">5</td>
@@ -388,7 +393,7 @@
                         <td><input type="text" class="form-control tableInputText materialUsed" name="items[4][type]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[4][size]"step="0.1" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[4][price]" ></td>
-                        <td><button type="button" id="cleanRowBtn" class="btn btn-outline-secondary" onclick="emptyRow(this);"> - </button></td>
+                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
                     </tr>
                 </tbody>
             </table>

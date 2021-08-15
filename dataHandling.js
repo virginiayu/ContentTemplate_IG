@@ -14,11 +14,13 @@ function dataHandling(resQuery, type='normal'){
 }
 
 function data_processer_normal(params){
-    let temp = params.items.map(function(item, ind){
-        if (item.size != '' && item.price != '') return item;
-        return null;
-    });
-    params.items = temp.filter(x => x !== null);
+    if(params.items){
+        let temp = params.items.map(function(item, ind){
+            if (item.size != '' && item.price != '') return item;
+            return null;
+        });
+        params.items = temp.filter(x => x !== null);
+    }
     return params;
 }
 

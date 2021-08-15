@@ -7,13 +7,14 @@ const ejs = require('ejs');
 const engine = require('ejs-locals');
 const fs = require('fs')
 
+
 const dataHandling = require('./dataHandling');
 
 /**
  * App Variables
  */
 const app = express();
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "8000";
 
 /**
  *  App Configuration
@@ -24,43 +25,49 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, "public")));
 
+
+
 /**
  * Routes Definitions
  */
 app.get("/", function(req, res) {
-    // res.render('index');
+    res.render('index');
 });
 // for non-design form submission
-app.post("/submit_form_non_design", function(req, res) {
-    var query = req.body; // req.query;
-
+app.post("/submit_normal_form", function(req, res) {
+    let query = req.body; // req.query;
+    console.log(query);
+    console.log("-------");
+    
     // data process
     let temp = dataHandling(query);
     console.log('after data dataHandling:', temp);
     console.log("-------");
 
-    // bind template
-    const templatePath = path.join(__dirname, 'views/template_normal.ejs');
-    // return promise object
-    // let html = ejs.renderFile(templatePath, temp);
-    // console.log(html);
-    // console.log("-------");
 
-    // return plain text
-    var template = fs.readFileSync(templatePath, 'utf-8');
-    let html2 = ejs.render(template, temp);
-    console.log(html2);
+    let html = "";
+    if (Object.keys(temp).length > 0) {
+        // bind template
+        const templatePath = path.join(__dirname, 'views/template_normal.ejs');
+        // return promise object
+        // html = ejs.renderFile(templatePath, temp);
 
-    // res.json({"data": html2});
-    res.send(html2);
-    // res.redirect('.');
+        // return plain text
+        var template = fs.readFileSync(templatePath, 'utf-8');
+        html = ejs.render(template, temp);
+    }
+    console.log(html);
+
+    console.log("########");
+
+    res.json({"data": html});
 });
 
-// for design form submission
-app.post("/submit_form_design", function(req, res) {
-    var data = req.body;
-    res.send(data);
-});
+// // for design form submission
+// app.post("/submit_form_design", function(req, res) {
+//     var data = req.body;
+//     res.send(data);
+// });
 
 /**
  * Server Activation

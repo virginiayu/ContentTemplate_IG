@@ -2,17 +2,17 @@
 .
 <% items.forEach(function(item){ 
     if (item.size && item.price) { %>
-    <% if (item.code) { %>
-        <%= item.code %>
-    <% } %>
-    <% if (item.wrist) { %>
-        手圍 <%= item.wrist %>cm
-    <% } %>
+        <% if (item.code) { %>
+            <%= item.code %>
+        <% } %>
+        <% if (item.wrist) { %>
+            手圍 <%= item.wrist %>cm
+        <% } %>
         尺寸 <%= item.size %>mm 
         HKD $<%= item.price %>
+        
     <% }
-}); %>
-可免費改手圍（下單時請揚聲）
+}); %>可免費改手圍（下單時請揚聲）
 .
 相關商品：👉🏻 #lgw_<%= category %>
 .

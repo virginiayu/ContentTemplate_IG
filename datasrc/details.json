@@ -1,19 +1,18 @@
 [
     {
-        "name" : "月亮石",
-        "nickname" : "月光石,月月,藍月亮石",
-        "category" : "愛情",
-        "shortDescription" : "增柔情",
-        "longDescription" : "增柔情\n平情緒",
-        "productGroup" : "月亮石"
+        "name"      : "月亮石",
+        "nickname"  : "月光石,月月,藍月亮石",
+        "name_eng"  : "moonstone",
+        "function_type"     : "愛情",
+        "description_short" : "增柔情",
+        "description_long"  : "增柔情\n平情緒"
     }, 
     {
-        "name" : "拉長石",
-        "nickname" : "拉長,彩拉長,藍光拉長",
-        "category" : "睡眠",
-        "shortDescription" : "增體力",
-        "longDescription" : "拉長石(Labradorite) 也被稱為灰月光石、灰月亮石、閃光石，是一種充滿靈性、具療癒功效的晶石。拉長石有助散發個人魅力，吸引心靈相近的人，所以拉長石常被...etc",
-        "productGroup" : "拉長石"
-
+        "name"      : "拉長石",
+        "nickname"  : "拉長,彩拉長,藍光拉長",
+        "name_eng"  : "",
+        "function_type"     : "睡眠",
+        "description_short"  : "增體力",
+        "description_long"   : "拉長石(Labradorite) 也被稱為灰月光石、灰月亮石、閃光石，是一種充滿靈性、具療癒功效的晶石。拉長石有助散發個人魅力，吸引心靈相近的人，所以拉長石常被...etc"
     }
 ]

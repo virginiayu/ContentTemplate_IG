@@ -3,36 +3,50 @@ $( document ).ready(function() {
     $("#normal").html($("#nonDesignTemplate").html());
     $("#design").html($("#designTemplate").html());
 
-    // bind auto complete 
-    $.getJSON('data/namelist.json', function(data) {
-        // console.log("namelist", data);
-        // JSON result in `data` variable
-        $( "#normal #category, #design .materialUsed" ).autocomplete({
-            source: data,
-        });
-    });
+    bindAutoComplete();
 
     //form submit handling
     $('.normalSubmitBtn').on('click', function(e){
         $.post( 
             '/submit_normal_form', 
-            $('.form_normal').serializeArray() , 
-            function( res ) {
-                if(res) {
-                    $("#resultTextarea").html(res.data);
-                    $("#result-tab").click();
-                }
-                else {
-                    alert("empty response");
-                }
+            $('.form_normal').serializeArray(), 
+            function(res){
+                ajaxSuccess(res);
+            },
+        "json");
+    });
+    $('.designSubmitBtn').on('click', function(e){
+        $.post( 
+            '/submit_design_form', 
+            $('.form_design').serializeArray(), 
+            function(res){
+                ajaxSuccess(res);
             },
         "json");
     });
   
 });
 
-function emptyRow(btnElm){
-    $(btnElm).parent().parent().find('input').val('');
+function ajaxSuccess (res){
+    // console.log(res);
+    if(res) {
+        $("#resultTextarea").html(res.data);
+        $("#result-tab").click();
+    }
+    else {
+        alert("empty response");
+    }
+}
+
+function bindAutoComplete(){
+    // bind auto complete 
+    $.getJSON('data/namelist.json', function(data) {
+        // console.log("namelist", data);
+        // JSON result in `data` variable
+        $( "#normal #name, #design .materialUsed" ).autocomplete({
+            source: data,
+        });
+    });
 }
 
 function copyToBoard(){
@@ -52,27 +66,30 @@ function copyToBoard(){
 }
 
 
-// function addNewRow() {
-//     var $html = 
-//     '<tr>'
-//         +'<th scope="row">{{rowNumber}}</th>'
-//         +'<td><input type="text" class="form-control tableInputText"></td>'
-//         +'<td><input type="text" class="form-control tableInputText"></td>'
-//         +'<td><input type="text" class="form-control tableInputText"></td>'
-//         +'<td><button type="button" id="addRowBtn" class="btn btn-light" onclick="removeRow(this);"> - </button></td>'
-//     +'</tr>';
-//     var $lastRowNum = $("table tbody tr:last-child th").text();    
-//     if ($lastRowNum == ""){
-//         $lastRowNum = 1;
-//     } else {
-//         $lastRowNum = parseInt($lastRowNum) + 1;
-//     }
-//     $html = $html.replaceAll('{{rowNumber}}', $lastRowNum);
-//     $("table tbody").append($html);
-// }
+function addRow(btnElm) {
+    var btnHtml = '<button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="removeRow(this);"> - </button>';
+    var formElm = $(btnElm).parents('form');
+    var firstRow = $(formElm).find('tbody tr:first').clone();
+    var rowNum = formElm.find('tbody tr:last td:first').html() ;
+    rowNum = isNaN(parseInt(rowNum)) ? 0 : parseInt(rowNum);
 
-// function removeRow($rowBtn){
-//     if ($rowBtn) {
-//         $($rowBtn).parents("tr").remove();
-//     }
+    $(firstRow).find("input").val('');
+    firstRow.children("td:last").html(btnHtml);
+    firstRow.children('td:first').html(rowNum+1);
+
+    var html = firstRow[0].outerHTML;
+    html = html.replaceAll('items[0]', 'items['+rowNum+']');
+    formElm.find("tbody").append(html);
+
+    bindAutoComplete();
+}
+
+function removeRow(rowBtn){
+    if (rowBtn) {
+        $(rowBtn).parents("tr").remove();
+    }
+}
+
+// function emptyRow(btnElm){
+//     $(btnElm).parent().parent().find('input').val('');
 // }

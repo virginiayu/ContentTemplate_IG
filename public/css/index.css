@@ -1,73 +1,43 @@
-/*  ### overwrite styles*/
-.container {
-    max-width: 768px;
-    min-width: 280px;
+body, .form-control, .btn{
+    font-size: 0.9rem;
 }
-
-textarea {
-    resize: none;
-    /* width: calc(100% - 17px); */
-    width: 100%;
-    /* padding-left: 10px; */
-    border-radius: 4px;
+.container{
+    min-width: 320px;
 }
-
-.col-form-label {
-    display: inline-block;
+.form-group{
+    margin-bottom: .5rem;
 }
-
-table input[type="text"] {
-    margin-bottom: 0px;
-}
-
-td input[type="text"] {
-    max-width: 100px;
-}
-
-.form-group.row input[type="text"] {
-    /* width: calc(100% - 20px); */
-    width: 100%;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-
-.form-check-label {
-    display: inline-block;
-}
-
-.form-check-inline {
-    display: inline;
-}
-/* .form-group.row > div[class^="col"]{
-    display:inline-block;
-}
- */
-.form-group label{
+.form-check-label{
     cursor: pointer;
 }
-/*  ### custom styles*/
-#designType {
-    width: 100% ;
+.form-control{
+    min-width: 80px;
 }
-
-/* #inputPrice,
-#inputPtdCode {
-    margin-bottom: 8px;
-    padding-left: 9px;
-    padding-right: 9px;
-} */
-
-.submitBtn {
-    margin-left: auto;
-    margin-right: auto;
+.tab-pane.fade:not(.show){
+    height: 0;
 }
-
-#addRowBtn{
-    float: right;
-/*     margin-right: 8px; */
+.fade {
+    transition: opacity .15s linear, height .15s;
 }
-
-
 .required {
     color: red;
+}
+.tab-pane textarea{
+    width: 100%;
+    height: 70vh;
+    max-height: calc(100vh - 10px);
+    resize: none;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+#csvBtn {
+    margin-top: -66px;
+}
+form tfoot td {
+    border-bottom: 0;
+}
+.form-check-input[type="checkbox"]{
+    cursor: pointer;
 }

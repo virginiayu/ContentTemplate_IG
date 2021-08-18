@@ -1,0 +1,35 @@
+[On Sale] <%= onlyOne %> <%= gridItem %> <%= ptdCode %> <%= specialname %>
+<%= titleChecklist %>
+.
+HKD $<%= price %>
+（替客人改好手圍才會寄出貨品）
+.
+<% description_short.forEach(function(item)
+{ %>► <%= item.name %> [<%= item.function_type %>]
+    - <%= item.description_short %>
+
+<% }) %>.
+相關款式：
+👉🏻 #lgw_<%= type %>
+👉🏻 #lgw_<%= series %>
+<%  for(var i=0; i<relatedTags.length; i++){ %>👉🏻 #lgw_<%=  relatedTags[i] %>
+<% } %>.
+ฅ^•ﻌ•^ฅ
+❇ 自然光拍攝 ♡
+❇ DM下單&查詢♡
+❇ 平郵包郵/速遞到付
+❇ 簡約包裝，如有需要可加購禮物盒
+
+ฅ^•ﻌ•^ฅ
+❇ 歡迎客制委託
+❇ 任何款式均可改用心儀嘅晶石
+❇ 可製作客人自創嘅款式
+.
+#水晶手鏈 #水晶手鍊 #水晶手串 #水晶手鏈設計款 #水晶手鍊設計款 #水晶 #天然石 #水晶手作 #水晶設計
+<% for(var i=0; i<relatedTags.length; i++) {
+    %>#<%= relatedTags[i] %>手鏈 #<%= relatedTags[i] %>手鍊 #<%= relatedTags[i] %>手串 
+<% } %><% description_short.forEach(function(item){
+    item.nickname.forEach(function(item2){
+    %>#<%= item2 %>手鏈 #<%= item2 %>手鍊 #<%= item2 %>手串 
+<% })
+}) %>

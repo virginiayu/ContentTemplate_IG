@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Upload CSV</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        #csvpath{
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h4>Upload CSV</h4>
+            <div class="text-end" style="height: 0;">
+                <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/"> Back to Home </a>
+            </div>
+            <!-- <p> - update csv for display content </p> -->
+            <div>Last Success Import: <span id="lastImportTime"></span></div>
+            <hr>
+            <form id="form_upload">
+                    <div class="form-group row">
+                        <div class="col-4">Import File</div>
+                        <div class="col-8"><input type="file" accept=".csv" name="csvFile" class="form-control" /></div>
+                    </div>
+                    <!-- <div class="form-group row"><div class="col">or</div></div>
+                    <div class="form-group row">
+                        <div class="col-4">CSV Path</div>
+                        <div class="col-8"><input type="text" id="csvpath" name="csvpath" class="form-control" /></div>
+                    </div> -->
+                    <input type="submit" class="btn btn-primary" value=" Submit " />
+            </form>
+            <div id="msgDiv" class="required"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- jquery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<!-- custom js -->
+<script type="text/javascript" src="/js/uploadcsv.js"></script>
+
+</html>

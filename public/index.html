@@ -15,43 +15,10 @@
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- font awesome -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous"> -->
     
-    <!-- <link rel="stylesheet" href="/css/index.css"> -->
-    <style>
-        body, .form-control, .btn{
-            font-size: 0.9rem;
-        }
-        .container{
-            min-width: 320px;
-        }
-        .form-group{
-            margin-bottom: .5rem;
-        }
-        .form-check-label{
-            cursor: pointer;
-        }
-        .form-control{
-            min-width: 80px;
-        }
-        .tab-pane.fade:not(.show){
-            height: 0;
-        }
-        .fade {
-            transition: opacity .15s linear, height .15s;
-        }
-        .required {
-            color: red;
-        }
-        .tab-pane textarea{
-            width: 100%;
-            height: 70vh;
-            resize: none;
-        }
-        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-            font-weight: bold;
-            /* text-decoration: underline; */
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 
 </head>
 
@@ -75,6 +42,9 @@
                     <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">Result</button>
                 </li>
             </ul>
+            <div class="text-end" style="height: 0;">
+                <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/uploadcsv.html">  Upload CSV  </a>
+            </div>
         </div>
     </div>
     <!-- tab panel -->
@@ -95,7 +65,16 @@
 
 
 <template id="nonDesignTemplate">
-<form class="form_normal" action="/submit_normal_form" method="POST">
+<form class="form_normal">
+    <!-- grid exist? -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="gridItem">Sell On Grid Shop</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridItem" name="gridItem">
+            </div>
+        </div>
+    </div>
     <!-- type -->
     <div class="form-group row">
         <label for="inputType" class="col-4 col-form-label" >Type <span class="required">*</span></label>
@@ -144,28 +123,18 @@
             </div>
         </div>
     </div>
-    <!-- grid exist? -->
+    <!-- crystal type -->
     <div class="form-group row">
-        <label class="col-4 col-form-label">Sell On Grid Shop</label>
+        <label for="name" class="col-4 col-form-label">Crystal Type</label>
         <div class="col-8">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="gridItem">
-                <!-- <label class="form-check-label" for="gridItem"></label> -->
-            </div>
-        </div>
-    </div>
-    <!-- category -->
-    <div class="form-group row">
-        <label for="category" class="col-4 col-form-label">Category</label>
-        <div class="col-8">
-            <input class="form-control" id="category" name="category" placeholder="Crystal Type" type="text">
+            <input class="form-control" id="name" name="name" placeholder="Crystal Type" type="text">
         </div>
     </div>
     <!-- Special Name -->
     <div class="form-group row">
-        <label for="specialName" class="col-4 col-form-label">Special Name</label>
+        <label for="specialname" class="col-4 col-form-label">Special Name</label>
         <div class="col-8">
-            <input class="form-control" id="specialName" name="specialName" placeholder="Special Name" type="text">
+            <input class="form-control" id="specialname" name="specialname" placeholder="Special Name" type="text">
         </div>
     </div>
     <!-- material check list -->
@@ -193,80 +162,91 @@
                         <td><input type="text" class="form-control tableInputText" name="items[0][size]" ></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][wrist]" step="0.1"></td>
                         <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
-                        <td><button type="button" class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">2</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[1][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText" name="items[1][size]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[1][wrist]"step="0.1" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[1][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">3</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[2][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText" name="items[2][size]"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[2][wrist]" step="0.1"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[2][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">4</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[3][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText" name="items[3][size]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[3][wrist]" step="0.1"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[3][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
+                        <td></td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td scope="col" colspan="6" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this);">+</button></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
     
-    <input type="button" class="btn btn-primary normalSubmitBtn" value=" Submit " />
+    <input type="button" class="btn btn-primary normalSubmitBtn" value="  Submit  " />
+    <br>
+    <br>
+
 </form>
 </template>
 
 
 <template id="designTemplate">
-<form class="form_design" action="/submit_form_design"  method="POST" >
+<form class="form_design">
+    <!-- customerise  -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="custom">客製化</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="custom" name="custom">
+            </div>
+        </div>
+    </div>
+    <!-- display method  -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="onlyOne">一物一圖</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"  id="onlyOne" name="onlyOne">
+            </div>
+        </div>
+    </div>
+     <!-- grid exist? -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="gridItem2">Sell On Grid Shop</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridItem2" name="gridItem">
+            </div>
+        </div>
+    </div>
     <!-- type I -->
     <div class="form-group row">
         <label for="inputType" class="col-4 col-form-label" >Type I<span class="required">*</span></label>
         <div class="col-8">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="type" id="type_fullball" value="bullball" checked>
+                <input class="form-check-input" type="radio" name="type" id="type_fullball" value="全珠款" checked>
                 <label class="form-check-label" for="type_fullball">全珠款</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="type" id="type_tube" value="tube">
+                <input class="form-check-input" type="radio" name="type" id="type_tube" value="彎管款">
                 <label class="form-check-label" for="type_tube">彎管款</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="type" id="type_chain" value="chain">
+                <input class="form-check-input" type="radio" name="type" id="type_chain" value="銀鏈款">
                 <label class="form-check-label" for="type_chain">銀鏈款</label>
             </div>
         </div>
     </div>
-    <!-- type 2 - design idea -->
+    <!-- type 2 x design idea -->
     <div class="form-group row">
         <label for="inputType" class="col-4 col-form-label" >Type II (Series)<span class="required">*</span></label>
         <div class="col-8">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="series" id="type_normal" value="normal" checked>
+                <input class="form-check-input" type="radio" name="series" id="type_normal" value="" checked>
                 <label class="form-check-label" for="type_type_normalfullball">/</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="series" id="type_light" value="light">
+                <input class="form-check-input" type="radio" name="series" id="type_light" value="輕設計">
                 <label class="form-check-label" for="type_light">輕設計</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="series" id="type_pearl" value="pearl">
+                <input class="form-check-input" type="radio" name="series" id="type_pearl" value="珍珠系列">
                 <label class="form-check-label" for="type_pearl">珍珠系列</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="series_name" id="type_topic" value="topic">
+                <input class="form-check-input" type="radio" name="series" id="type_topic" value="主題系列">
                 <label class="form-check-label" for="type_topic">主題系列</label>
             </div>
         </div>
@@ -278,41 +258,12 @@
             <input class="form-control" id="type_topic_input" name="serialsName" placeholder="Series Name" type="text"  placeholder="主題系列名">
         </div>
     </div>
-    <!-- display method  -->
+
+    <!-- Item name -->
     <div class="form-group row">
-        <label class="col-4 col-form-label">一物一圖</label>
+        <label for="specialname" class="col-4 col-form-label">Item Name</label>
         <div class="col-8">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="onlyOne">
-                <!-- <label class="form-check-label" for="onlyOne">Yes</label> -->
-            </div>
-        </div>
-    </div>
-    <!-- customerise  -->
-    <div class="form-group row">
-        <label class="col-4 col-form-label">客製化</label>
-        <div class="col-8">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="custom">
-                <!-- <label class="form-check-label" for="onlyOne">Yes</label> -->
-            </div>
-        </div>
-    </div>
-    <!-- grid exist? -->
-    <div class="form-group row">
-        <label class="col-4 col-form-label">Sell On Grid Shop</label>
-        <div class="col-8">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="gridItem">
-                <!-- <label class="form-check-label" for="gridItem"></label> -->
-            </div>
-        </div>
-    </div>
-     <!-- Item name -->
-    <div class="form-group row">
-        <label for="ptdName" class="col-4 col-form-label">Item Name</label>
-        <div class="col-8">
-            <input class="form-control" id="ptdName" name="ptdName" placeholder="Special Name" type="text">
+            <input class="form-control" id="specialname" name="specialname" placeholder="Special Name" type="text">
         </div>
     </div>
     <!-- Ptd Code -->
@@ -347,59 +298,35 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Cost Code</th>
+                        <!-- <th scope="col">Cost Code</th> -->
                         <th scope="col">Type</th>
                         <th scope="col">Size (mm)</th>
-                        <th scope="col">Price (HKD)</th>
-                        <th scope="col"></th>
+                        <!-- <th scope="col">Price (HKD)</th> -->
+                        <th scope="col"> </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td scope="row">1</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[0][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[0][type]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[0][size]"step="0.1" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">2</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[1][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[1][type]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[1][size]" step="0.1"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[1][price]" "></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">3</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[2][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[2][type]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[2][size]" step="0.1"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[2][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">4</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[3][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[3][type]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[3][size]" step="0.1"></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[3][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">5</td>
-                        <td><input type="text" class="form-control tableInputText" name="items[4][code]" ></td>
-                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[4][type]" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[4][size]"step="0.1" ></td>
-                        <td><input type="number" class="form-control tableInputText" name="items[4][price]" ></td>
-                        <td><button type="button"  class="btn btn-outline-secondary cleanRowBtn" onclick="emptyRow(this);"> - </button></td>
+                        <!-- <td><input type="text" class="form-control tableInputText" name="items[0][code]" ></td> -->
+                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[0][name]" ></td>
+                        <td><input type="text" class="form-control tableInputText" name="items[0][size]"step="0.1" ></td>
+                        <!-- <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td> -->
+                        <td></td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td scope="col" colspan="4" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this, 'design');">+</button></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
-    <input type="submit" id="SubmitBtn" class="btn btn-primary" value=" Submit " />
+    
+    <input type="button" class="btn btn-primary designSubmitBtn" value="  Submit  " />
+    <br>
+    <br>
 </form>
 </template>
 

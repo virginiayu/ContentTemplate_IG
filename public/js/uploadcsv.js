@@ -9,9 +9,9 @@ $( document ).ready(function() {
             type: "POST",
             data: new FormData(this),
             processData: false,
-            contentType: "multipart/form-data", //false,
+            contentType: false, //  "multipart/form-data", //false,
             success : function(res){
-                alert('123');
+                console.log('123');
             }
         });
 

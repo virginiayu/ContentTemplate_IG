@@ -5,17 +5,25 @@ const express = require('express');
 const path = require("path");
 const ejs = require('ejs');
 const engine = require('ejs-locals');
-const fs = require('fs')
+const fs = require('fs');
 const multer = require('multer');
-const csv2json = require("csvtojson");
 
 /**
  * App Variables
  */
 const app = express();
 const port = process.env.PORT || "8000";
-const upload = multer();
+const csvFilter = (req, file, cb) =>{
+    if (file.mimetype == 'application/vnd.ms-excel' || file.originalname.include(".csv")){
+        cb(null, true);
+    }
+    else {
+        cb("Please upload only csv file", false);
+    }
+};
+const upload = multer({fileFilter:csvFilter});
 
+// custom function
 const dataHandling = require('./dataHandling');
 const updateCSV = require('./updateCSV.js');
 
@@ -25,8 +33,9 @@ const updateCSV = require('./updateCSV.js');
 app.engine('ejs', engine);
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(bodyParser.json());
 
 
 /**
@@ -65,40 +74,19 @@ app.get("/get_csv_date", (req, res) => {
     res.send(temp["csv_import_data"]);
 });
 
-app.post("/submit_csv", upload.single('csvFile'), (req, res) => {
+const uploadFields = [
+  { name: 'csvFile'},
+  { name: 'csvPath'}
+];
+app.post("/submit_csv", upload.fields(uploadFields), (req, res) => {
     try {
-        console.log(req.file);
-        console.log("-------");
-        // the buffer here containes your file data in a byte array 
-        const csvFile = req.file.buffer.toString('utf8');
-        const rows = csvFile.split('\n');
-        for (let row of rows) {
-            const columns = row.replace(/"/g, '').split(',');
-            console.log(columns);
+        const result = updateCSV(req);        
+        if (result) {
+            res.sendStatus(200);
         }
-
-
-        // // Convert a csv file with csvtojson
-        // csv2json()
-        // .fromFile(csvFilePath)
-        // .then(function(jsonArrayObj){ //when parse finished, result will be emitted here.
-        //     console.log(jsonArrayObj); 
-        // })
-
-        // // Parse large csv with stream / pipe (low mem consumption)
-        // csv2json()
-        // .fromStream(readableStream)
-        // .subscribe(function(jsonObj){ //single json object will be emitted for each csv line
-        //     // parse each json asynchronousely
-        //     return new Promise(function(resolve,reject){
-        //         asyncStoreToDb(json,function(){resolve()})
-        //     })
-        // }) 
-
-        // //Use async / await
-        // const jsonArray=await csv2json().fromFile(filePath);
-
-        res.sendStatus(200);
+        else {
+            res.sendStatus(400);
+        }
     } catch (err) {
         console.log(err);
         res.sendStatus(400);

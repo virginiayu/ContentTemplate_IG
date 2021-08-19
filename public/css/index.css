@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding:0;
+    /* border: 0; */
+}
 body, .form-control, .btn{
     font-size: 0.9rem;
 }
@@ -11,7 +16,7 @@ body, .form-control, .btn{
     cursor: pointer;
 }
 .form-control{
-    min-width: 80px;
+    min-width: 76px;
 }
 .tab-pane.fade:not(.show){
     height: 0;
@@ -24,8 +29,8 @@ body, .form-control, .btn{
 }
 .tab-pane textarea{
     width: 100%;
-    height: 70vh;
-    max-height: calc(100vh - 10px);
+    height: 60vh;
+    /* max-height: calc(100vh - 200px); */
     resize: none;
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{

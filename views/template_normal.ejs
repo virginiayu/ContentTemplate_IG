@@ -1,25 +1,30 @@
-[On Sale] [<%= uniqueness %>] #<%= (specialname)? specialname : name  %>
-.<% items.forEach(function(item){ 
-if (item.size && item.price) { %>
-<% if (item.code) { %><%= item.code %><% } %>
-<% if (item.wrist) { %>手圍 <%= item.wrist %>cm<% } %>
-尺寸 <%= item.size %>mm
-HKD $<%= item.price %>
-<% }
-}); %>可免費改手圍（下單時請揚聲）
+[On Sale] [<%= uniqueness %>] #<%= (specialname)? specialname : name  %> <%= type %> <%= seqNo %>
 .
-相關商品：👉🏻 #lgw_<%= name %>
+<% items.forEach(function(item){ 
+    if (item.code)  { %><%= item.code %><% } 
+    if (item.wrist) { %>手圍 <%= item.wrist %>cm<% } 
+    if (item.size)  { %>尺寸 <%= item.size %>mm<% } 
+    if (item.price) { %>HKD $<%= item.price %><% }
+}) %>
+可免費改手圍（下單時請揚聲）
+.
+相關商品：👉🏻 #lgw_<%= (specialname)? specialname : name %>
 .
 自然光拍攝
 DM下單
 平郵包郵 | 金剛/順豐到付
 .
 <%if (description_long) {%><%= description_long %>
-<% } else { %>功效類別: <%= function_type %>
-功效:
-<%= description_short %><% } %>.
+<% } else if (description_short) { %>功效類別: <%= function_type %>
+功效: <%= description_short %>
+<% } %>.
 #水晶手鏈 #水晶手鍊 #水晶手串
-<%if (name) {%>#<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串 <% } %>
-<% for(var i=0; i<nickname.length; i++) {
-    %>#<%= nickname[i] %>手鏈 #<%= nickname[i] %>手鍊 #<%= nickname[i] %>手串 
+<%
+    if (specialname) {%>#<%= specialname %>手鏈 #<%= specialname %>手鍊 #<%= specialname %>手串<% } 
+    if (name) {%>#<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串<% } 
+    for(var i=0; i<nickname.length; i++) {
+        %>#<%= nickname[i] %>手鏈 #<%= nickname[i] %>手鍊 #<%= nickname[i] %><%= type %>
+<%  } %>
+<% for(var i=0; i<othername.length; i++) {
+    %>#<%= othername[i] %>手鏈 #<%= othername[i] %>手鍊 #<%= othername[i] %><%= type %>
 <% } %>

@@ -33,18 +33,18 @@
                 <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/"> Back to Home </a>
             </div>
             <!-- <p> - update csv for display content </p> -->
-            <div>Last Success Import: <span id="lastImportTime"></span></div>
+            <div class="text-secondary">Last Success Import: <span id="lastImportTime"></span></div>
             <hr>
             <form id="form_upload">
                     <div class="form-group row">
                         <div class="col-4">Import File</div>
                         <div class="col-8"><input type="file" accept=".csv" name="csvFile" class="form-control" /></div>
                     </div>
-                    <!-- <div class="form-group row"><div class="col">or</div></div>
+                    <div class="form-group row"><div class="col text-center">or</div></div>
                     <div class="form-group row">
                         <div class="col-4">CSV Path</div>
                         <div class="col-8"><input type="text" id="csvpath" name="csvpath" class="form-control" /></div>
-                    </div> -->
+                    </div>
                     <input type="submit" class="btn btn-primary" value=" Submit " />
             </form>
             <div id="msgDiv" class="required"></div>

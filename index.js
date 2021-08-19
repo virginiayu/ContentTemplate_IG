@@ -29,7 +29,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, "public")));
 
 
-
 /**
  * Routes Definitions
  */
@@ -68,9 +67,11 @@ app.get("/get_csv_date", (req, res) => {
 
 app.post("/submit_csv", upload.single('csvFile'), (req, res) => {
     try {
-        const csvFile = req.file.buffer.toString();
+        console.log(req.file);
+        console.log("-------");
+        // the buffer here containes your file data in a byte array 
+        const csvFile = req.file.buffer.toString('utf8');
         const rows = csvFile.split('\n');
-
         for (let row of rows) {
             const columns = row.replace(/"/g, '').split(',');
             console.log(columns);

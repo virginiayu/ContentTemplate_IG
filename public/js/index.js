@@ -28,12 +28,12 @@ $( document ).ready(function() {
 });
 
 function ajaxSuccess (res){
-    // console.log(res);
     if(res) {
         $("#resultTextarea").html(res.data);
         $("#result-tab").click();
     }
     else {
+        // $("#resultTextarea").html("");
         alert("empty response");
     }
 }
@@ -41,7 +41,6 @@ function ajaxSuccess (res){
 function bindAutoComplete(){
     // bind auto complete 
     $.getJSON('data/namelist.json', function(data) {
-        // console.log("namelist", data);
         // JSON result in `data` variable
         $( "#normal #name, #design .materialUsed" ).autocomplete({
             source: data,

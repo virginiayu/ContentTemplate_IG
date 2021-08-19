@@ -1,7 +1,6 @@
 /** import libraries */
 const path = require("path");
 const ejs = require('ejs');
-// const engine = require('ejs-locals');
 const fs = require('fs');
 
 /** port */
@@ -41,7 +40,7 @@ function dataHandling(resQuery, type='normal'){
 function data_processer_normal(params){
     if(params.items){
         let temp = params.items.map(function(item, ind){
-            if (item.size != '' && item.price != '') return item;
+            if (item.size || item.price ) return item;
             return null;
         });
         params.items = temp.filter(x => x !== null);
@@ -72,6 +71,11 @@ function data_processer_normal(params){
         }
 
     }
+
+    if (params.seqNo) params.seqNo += "號";
+
+    if (params.othername) params.othername = params.othername.split(",");
+
     return params;
 }
 

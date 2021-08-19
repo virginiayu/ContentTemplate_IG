@@ -9,7 +9,7 @@ $( document ).ready(function() {
             type: "POST",
             data: new FormData(this),
             processData: false,
-            contentType: false,
+            contentType: "multipart/form-data", //false,
             success : function(res){
                 alert('123');
             }

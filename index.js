@@ -21,7 +21,8 @@ const csvFilter = (req, file, cb) =>{
         cb("Please upload only csv file", false);
     }
 };
-const upload = multer({fileFilter:csvFilter});
+// const upload = multer({fileFilter:csvFilter});
+const upload = multer();
 
 // custom function
 const dataHandling = require('./dataHandling');
@@ -73,6 +74,10 @@ app.get("/get_csv_date", (req, res) => {
     const temp = JSON.parse(config);
     res.send(temp["csv_import_data"]);
 });
+app.post("/update_csv_by_path", (req, res) => {
+    console.log("update_csv_by_path");
+    
+});
 
 const uploadFields = [
   { name: 'csvFile'},
@@ -80,19 +85,12 @@ const uploadFields = [
 ];
 app.post("/submit_csv", upload.fields(uploadFields), (req, res) => {
     try {
-        const result = updateCSV(req);        
-        if (result) {
-            res.sendStatus(200);
-        }
-        else {
-            res.sendStatus(400);
-        }
+        updateCSV(req, res);
     } catch (err) {
         console.log(err);
         res.sendStatus(400);
     }
 });
-
 
 /**
  * Server Activation

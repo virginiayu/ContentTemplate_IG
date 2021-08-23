@@ -1,7 +1,12 @@
-/** import libraries */
+/**
+ * Required External Modules
+ */
 const path = require("path");
 const ejs = require('ejs');
 const fs = require('fs');
+
+// custom modules
+const utility = require('./utility.js');
 
 /** port */
 function dataHandling(resQuery, type='normal'){
@@ -55,7 +60,7 @@ function data_processer_normal(params){
         };
         if (params.name) {
             basicjson.name = params.name; 
-            const json = getJsonContent('datasrc/details.json');
+            const json = utility.getJsonContent('datasrc/detail.json');
 
             temp = json.filter(it => it.name === params.name);  
             // console.log("temp", temp);
@@ -75,6 +80,9 @@ function data_processer_normal(params){
     if (params.seqNo) params.seqNo += "號";
 
     if (params.othername) params.othername = params.othername.split(",");
+
+    if(params.gridItem) params.gridItem = "[格仔鋪有售]";
+    else params.gridItem = "";
 
     return params;
 }
@@ -122,7 +130,7 @@ function data_processer_design(params){
         });
 
         // filter useful description from src
-        const json = getJsonContent('datasrc/details.json');
+        const json = utility.getJsonContent('datasrc/detail.json');
         let shortDesc = [];
         shortDesc = json.filter( it => relatedTags.indexOf(it.name) > -1 );  
         temp = shortDesc.map(function(item, ind){
@@ -140,23 +148,17 @@ function data_processer_design(params){
     }
 
     if(params.onlyOne) params.onlyOne = "[一物一圖]";
+    else params.onlyOne = "";
+    if (!params.custom) params.custom = "";
 
     if(params.ptdCode) params.ptdCode = "[#"+params.ptdCode+"]";
 
     if(params.gridItem) params.gridItem = "[格仔鋪有售]";
+    else params.gridItem = "";
 
     return params;
 }
 
-
-/** utilitize */
-function getJsonContent(filepath = ''){
-    if (filepath) {
-        let content = fs.readFileSync(filepath, 'utf-8');
-        return JSON.parse(content);
-    }
-    return null;
-}
 
 /** bind template */
 function getTemplateResult(data, filepath = ''){

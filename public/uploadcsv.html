@@ -28,33 +28,35 @@
     <div class="row">
         <div class="col">
             <br>
-            <h4>Upload CSV</h4>
+            <h4>Update CSV</h4>
             <div class="text-end" style="height: 0;">
                 <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/"> Back to Home </a>
             </div>
-            <!-- <p> - update csv for display content </p> -->
-            <!-- 0000-00-00T00:00:00Z -->
-            <div class="text-secondary">Last Success Import: <span id="lastImportTime"></span></div>
-            <hr>
-            <div class="">
-                <!-- <label class="col-4 col-form-label" for="csvPath">CSV Path</label> -->
-                <!-- <div class="col-8"><input type="url" pattern="https://.*"  id="csvpath" name="csvPath" class="form-control" placeholder="Google Sheet URL"/></div> -->
-                <button class="btn  btn-primary" id="updateBySheet">Update By Google Sheet</button >
-
+            <hr>            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h5>Update Function Details</h5> 
+                <small class="text-secondary mb-2">Last Success Import: <span id="lastImportTime"></span></small> <!-- 0000-00-00T00:00:00Z -->
+                <small id="msgDiv_func" class="required mb-2"></small>
             </div>
-            <hr>
+            <div class="">
+                <button class="btn  btn-primary" id="updateBySheet">By Google Sheet</button >
+            </div>
+            <div class="form-group row"><div class="col-12 mt-2">OR</div></div>
             <form id="form_upload">
                 <div class="form-group row">
-                    <label class="col-12 col-form-label">Import By CSV File</label>
+                    <!-- <label class="col-12 col-form-label">Import By CSV File</label> -->
                     <div class="col-12"><input type="file" accept=".csv" name="csvFile" class="form-control" /></div>
                 </div>
                 <div class="" >
-                    <input type="submit" class="btn btn-primary mt-2" value=" Submit " />
+                    <input type="submit" class="btn btn-primary mt-2" value=" By File Upload " style="margin-right: 8px;" />
                     <button class="btn  btn-outline-secondary mt-2" id="reset" type="reset">Reset</button >
                 </div>
             </form>
-
-            <div id="msgDiv" class="required"></div>
+            <hr>
         </div>
     </div>
 </div>

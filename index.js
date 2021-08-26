@@ -8,6 +8,7 @@ const engine = require('ejs-locals');
 const fs = require('fs');
 const multer = require('multer');
 
+
 /**
  * App Variables
  */
@@ -25,7 +26,8 @@ const csvFilter = (req, file, cb) =>{
 const upload = multer();
 
 // custom function
-const dataHandling = require('./dataHandling');
+const utility = require('./utility.js');
+const dataHandling = require('./dataHandling.js');
 const updateCSV = require('./updateCSV.js');
 
 /**
@@ -46,7 +48,14 @@ app.get("/", function(req, res) {
     res.render('index');
 });
 
+
+
 /** for index.html */
+// for frontend autocomplete
+app.get("/namelist", function(req, res) {
+    const temp = utility.getJsonContent('datasrc/namelist.json');
+    res.json(temp);
+});
 // for non-design form submission
 app.post("/submit_normal_form", function(req, res) {
     let query = req.body; // req.query;
@@ -56,7 +65,7 @@ app.post("/submit_normal_form", function(req, res) {
     
     res.json(result);
 });
-
+// for design form submission
 app.post("/submit_design_form", function(req, res) {
     let query = req.body; // req.query;
     
@@ -70,13 +79,12 @@ app.post("/submit_design_form", function(req, res) {
 
 /** for uploadcsv.html */
 app.get("/get_csv_date", (req, res) => {
-    const config = fs.readFileSync('datasrc/config.json', 'utf-8');
-    const temp = JSON.parse(config);
-    res.send(temp["csv_import_data"]);
-});
-app.post("/update_csv_by_path", (req, res) => {
-    console.log("update_csv_by_path");
-    
+    // const config = fs.readFileSync('datasrc/config.json', 'utf-8');
+    // const temp = JSON.parse(config);
+    const temp = utility.getJsonContent('datasrc/config.json');
+    // console.log(temp);
+    const date = temp["csv_import_data"]? temp["csv_import_data"] : "/";
+    res.send(date);
 });
 
 const uploadFields = [
@@ -91,6 +99,17 @@ app.post("/submit_csv", upload.fields(uploadFields), (req, res) => {
         res.sendStatus(400);
     }
 });
+
+app.post("/googlesheet_function", (req, res) => {
+    try {
+        updateCSV(req, res, "google");
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+});
+
+
 
 /**
  * Server Activation

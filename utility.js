@@ -10,13 +10,16 @@ const getJsonContent = function( filepath = '') {
             let content = fs.readFileSync(filepath, 'utf-8');
             switch (typeof content){
                 case 'string': 
-                    return JSON.parse(content);
+                    if(content && content.length > 2)
+                        return JSON.parse(content);
+                    else return {};
                     break;
                 case 'object':
-                    return content 
+                    return content ;
                     break;
                 default:
-                    return "{}";
+                    const temp = {};
+                    return temp;
             }
             
         } catch (error) {
@@ -29,27 +32,23 @@ const getJsonContent = function( filepath = '') {
     return null;
 }
 
-// // overwrite file content (json) with readable space
-// const overwriteJsonFile = function (filePath, json, callback = undefined){
-//     if (json) {
-//         const str = JSON.stringify(json, null, 4); // 4 == num. of space for readability purposes
-//         const result =
-//         fs.writeFileSync(filePath, str, function(err) {
-//             if(err) {
-//                 console.log(err);
-//                 result = "error";
-//             }
-//             console.log("The file was saved!");
-//             // result = true;
-//             if (callback !== undefined) callback();
-//         }); 
-//         console.log("writeFileSync", result);
-//     }
-//     // return false;
-// }
+
+// overwrite file content (json) with readable space
+function overwriteFileContent(jsonPath, inputString = "", callback = undefined){
+    if (jsonPath) {
+        fs.writeFile(jsonPath, inputString, 'utf8', (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+            if (callback) {
+                callback(err);
+            }
+        });
+    }
+}
+
 
 // eport module
 module.exports = {
     getJsonContent: getJsonContent,
-    // overwriteJsonFile: overwriteJsonFile
+    overwriteFileContent: overwriteFileContent
 };

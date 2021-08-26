@@ -15,6 +15,9 @@ $( document ).ready(function() {
                 if (res.status === "success" && res.data) {
                     $("#lastImportTime").html(res.data);
                 }
+                else {
+                    $("#msgDiv_func").html("return status:" + res.status) ;
+                }
             }
         });
 
@@ -23,11 +26,11 @@ $( document ).ready(function() {
 
     $("#updateBySheet").click(function(e){
         $.ajax({
-            url: "/update_csv_by_path",
-            type: "POST",
+            url: "/googlesheet_function",
+            type: "post",
             // data: new FormData(this),
-            processData: false,
-            contentType: false, //  "multipart/form-data", //false,
+            // processData: false,
+            // contentType: false, //  "multipart/form-data", //false,
             success : function(res){
                 console.log('updateBySheet response', res);                
             }

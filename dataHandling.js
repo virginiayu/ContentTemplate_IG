@@ -8,10 +8,12 @@ const fs = require('fs');
 // custom modules
 const utility = require('./utility.js');
 
+const _jsonPath_detail = 'datasrc/detail.json';
+
 /** port */
 function dataHandling(resQuery, type='normal'){
     let query = JSON.parse(JSON.stringify(resQuery));
-    console.log("req query", query);
+    // console.log("req query", query);
     
     if (type == 'design' &&  query.custom == 'on' ){
         type = 'custom';
@@ -23,17 +25,17 @@ function dataHandling(resQuery, type='normal'){
     switch (type) {
         case 'normal':
             data = data_processer_normal(query);
-            console.log("processed data: ", data);
+            // console.log("processed data: ", data);
             result = getTemplateResult(data, 'views/template_normal.ejs');
             break; 
         case 'custom':
             data = data_processer_custom(query);
-            console.log("processed data: ", data);
+            // console.log("processed data: ", data);
             result = getTemplateResult(data, 'views/template_customize.ejs');
             break; 
         case 'design':
             data = data_processer_design(query);
-    console.log("processed data: ", data);
+            // console.log("processed data: ", data);
             result = getTemplateResult(data, 'views/template_design.ejs');
             break; 
     }
@@ -59,19 +61,25 @@ function data_processer_normal(params){
             "description_long"  : ""
         };
         if (params.name) {
-            basicjson.name = params.name; 
-            const json = utility.getJsonContent('datasrc/detail.json');
+            basicjson.name = params.name;
+            const filepath = _jsonPath_detail;
+            // console.log("existsync", fs.existsSync(filepath));
+            if (fs.existsSync(filepath)) {
+                const json = utility.getJsonContent(filepath);
 
-            temp = json.filter(it => it.name === params.name);  
-            // console.log("temp", temp);
-            temp = temp.length > 0 ? temp[0]:basicjson;
-            Object.assign(params, temp);
+                temp = json.filter(it => it.name === params.name);  
+                temp = temp.length > 0 ? temp[0]:basicjson;
+                Object.assign(params, temp);
+            }        
+            else {
+                Object.assign(params, basicjson);
+            }    
         }
         else {
             Object.assign(params, basicjson);
         }
 
-        if (params.nickname.length > 0) {
+        if (params.nickname && params.nickname.length > 0) {
             params.nickname = params.nickname.split(",");
         }
 
@@ -103,8 +111,6 @@ function data_processer_custom(params) {
             }
         });
 
-        console.log(titleChecklist, relatedTags);
-
         let basicjson = {
             "titleChecklist": titleChecklist.join(" x "),
             "relatedTags"   : relatedTags
@@ -130,14 +136,18 @@ function data_processer_design(params){
         });
 
         // filter useful description from src
-        const json = utility.getJsonContent('datasrc/detail.json');
+        const filepath = _jsonPath_detail;
         let shortDesc = [];
-        shortDesc = json.filter( it => relatedTags.indexOf(it.name) > -1 );  
-        temp = shortDesc.map(function(item, ind){
-            item.nickname = item.nickname.split(",");
-            return item;
-        });
-        shortDesc = temp;
+        if (fs.existsSync(filepath)) {
+            const json = utility.getJsonContent(filepath);
+            console.log();
+            shortDesc = json.filter( it => relatedTags.indexOf(it.name) > -1 );  
+            temp = shortDesc.map(function(item, ind){
+                item.nickname = item.nickname.split(",");
+                return item;
+            });
+            shortDesc = temp;
+        }
         
         let basicjson = {
             "description_short" : shortDesc,
@@ -173,7 +183,6 @@ function getTemplateResult(data, filepath = ''){
         let template = fs.readFileSync(templatePath, 'utf-8');
         html = ejs.render(template, data);
     }
-    console.log(html);
 
     return {"data" : html};
 }

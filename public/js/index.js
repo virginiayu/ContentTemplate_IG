@@ -40,7 +40,7 @@ function ajaxSuccess (res){
 
 function bindAutoComplete(){
     // bind auto complete 
-    $.getJSON('/namelist', function(data) {
+    $.getJSON('/crystaltypelist', function(data) {
     // $.getJSON('data/namelist.json', function(data) {
         // JSON result in `data` variable
         $( "#normal #name, #design .materialUsed" ).autocomplete({

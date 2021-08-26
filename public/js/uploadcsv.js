@@ -32,7 +32,11 @@ $( document ).ready(function() {
             // processData: false,
             // contentType: false, //  "multipart/form-data", //false,
             success : function(res){
-                console.log('updateBySheet response', res);                
+                console.log('updateBySheet response', res);
+                if (res.status == "success"){
+                    $("#msgDiv_func").html("Update successfully");
+                    $("#lastImportTime").html(res.data);
+                }               
             }
         });
     });

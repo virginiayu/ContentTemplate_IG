@@ -6,6 +6,8 @@ const util = require('util')
 const fs = require('fs');
 const {google} = require('googleapis'); 
 
+const _jsonPath_config = 'datasrc/config.json';
+const _jsonPath_detail = 'datasrc/detail.json';
 
 // custom modules
 const utility = require('./utility.js');
@@ -17,7 +19,6 @@ function updateCSV(req, res, type="") {
         // update by google sheet
         readGoogleSheets()
         .then((rows)=>{
-            console.log("then");
             console.log("typeof ", typeof rows);
             const json = convertSheetsRowsToJson(rows);
             const result = writeSheetsToDataSrc(res, json);
@@ -26,29 +27,45 @@ function updateCSV(req, res, type="") {
         .catch(function (err) {
             console.log('Error: ', err);
         });
-        // console.log("range, majorDimension, values", a.range, a.majorDimension, a.values);
-        
+    }
+    else if (type == "date"){
+        return getLastUpdateDate();
     }
     else {
         // update by upload csv file
-
         const csvFile = req.files.csvFile;
-
-        // console.log("csvFile", csvFile);
-        // console.log("-------");
-
         const json = convertCSVToJson(csvFile[0]);
-        const result = utility.overwriteJsonFile("datasrc/detail.json", json);
-        console.log("result", result);
-        if (result === true){
-            // end point response function
-            updateConfigFileDate(res);
-        }
-        // return true;
-        res.send({"status": "success"});
+        const callback = function (err){
+            if ( !err ){
+                // end point response function
+                updateConfigFileDate(res);
+            }
+            // res.send({"status": "success"});
+        };
+        const result = utility.overwriteFileContent(_jsonPath_detail, json, callback);
     }
 
     return null;
+}
+
+function getLastUpdateDate(){
+     try {
+        const date = "/";
+        const filepath = _jsonPath_config;
+        if (fs.existsSync(filepath)) {
+            // const config = fs.readFileSync(filepath, 'utf-8');
+            // const temp = JSON.parse(config);
+            const temp = utility.getJsonContent(filepath);
+            const date = temp["csv_import_data"]? temp["csv_import_data"] : "/";
+        }
+        else {
+            console.log("filepath not exist - ", filepath)
+        }
+        return date;
+
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 function convertCSVToJson(csvFile){
@@ -56,25 +73,21 @@ function convertCSVToJson(csvFile){
         // the buffer here containes your file data in a byte array 
         const csvBuffStr = csvFile.buffer.toString('utf8');
         console.log("typof csvBuffStr", typeof csvBuffStr);
-        // console.log(csvBuffStr);
         console.log("-------");
         
         const rows = csvBuffStr.split('\r');
         let header = rows.shift();
         header = header.split(',');
-        // console.log(header);
         let jsonArray = [];
         for (let row of rows) {
             // const columns = row.replace(/"/g, '').split(',');
             const columns = row.split(',');
-            // console.log(columns);
             let json = {};
             columns.forEach(function(col, ind) {
                 json[header[ind]] = col.replace(/"/g, '');
             });
             jsonArray.push(json);
         }
-        // console.log(jsonArray);
         return jsonArray;
     }
     return null;
@@ -83,21 +96,18 @@ function convertCSVToJson(csvFile){
 // update config file after overwrite successfully
 function updateConfigFileDate(res){
     const currDatetime = (new Date()).toISOString('utf-8');
-    const jsonPath = "datasrc/config.json";
+    const jsonPath = _jsonPath_config;
     let json = utility.getJsonContent(jsonPath);
-    console.log("exist json", json);
 
     if (json === null) {
         return false;
     } 
     else {
         json['csv_import_data'] = currDatetime;
-        console.log("new json", json);
-        const inputString = JSON.stringify(json, null, 4);
         const callback = function(err) {
             res.send({"status": "success", "data": currDatetime});
         };
-        utility.overwriteFileContent(jsonPath, inputString, callback);
+        utility.overwriteFileContent(jsonPath, json, callback);
     }
 }
 
@@ -110,7 +120,6 @@ function updateConfigFileDate(res){
  */
 async function readGoogleSheets(){
     console.log("readGoogleSheets()");
-
     try{
         const auth = new google.auth.GoogleAuth({
             keyFile : "datasrc/credentials.json",
@@ -139,7 +148,7 @@ async function readGoogleSheets(){
         const getRows = await googleSheets.spreadsheets.values.get({
             auth: auth,
             spreadsheetId: spreedsheetId,
-            range: "testing"// "工作表1"
+            range: "功效"// "工作表1"
         });
 
         // write row(s) to spreadsheet
@@ -163,7 +172,6 @@ async function readGoogleSheets(){
     }
 }
 
-
 function convertSheetsRowsToJson(rows) {
     console.log("---");
     if (rows && rows.values) {
@@ -180,7 +188,6 @@ function convertSheetsRowsToJson(rows) {
                 json.push(temp);
             } 
         });
-        console.log(json);
         return json;
     }
     return [];
@@ -190,12 +197,14 @@ function writeSheetsToDataSrc (res, jsonAry){
     console.log("writeSheetsToDataSrc");
 
     if (jsonAry && jsonAry.length > 0) {
-        const jsonPath = "datasrc/detail.json";
-        const inputString = JSON.stringify(jsonAry, null, 4);
+        
         const callback = function(err) {
-            res.send({"status": "success"});
+            if (!err){
+                updateConfigFileDate(res);
+                // res.send({"status": "success"});
+            }
         };
-        utility.overwriteFileContent(jsonPath, inputString, callback);
+        utility.overwriteFileContent(_jsonPath_detail, jsonAry, callback);
     }
     console.log("Empty json array", jsonAry);
 }

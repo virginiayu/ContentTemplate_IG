@@ -52,9 +52,9 @@ app.get("/", function(req, res) {
 
 /** for index.html */
 // for frontend autocomplete
-app.get("/namelist", function(req, res) {
+app.get("/crystaltypelist", function(req, res) {
     const temp = utility.getJsonContent('datasrc/namelist.json');
-    res.json(temp);
+    res.send(temp);
 });
 // for non-design form submission
 app.post("/submit_normal_form", function(req, res) {
@@ -76,15 +76,9 @@ app.post("/submit_design_form", function(req, res) {
 });
 
 
-
 /** for uploadcsv.html */
 app.get("/get_csv_date", (req, res) => {
-    // const config = fs.readFileSync('datasrc/config.json', 'utf-8');
-    // const temp = JSON.parse(config);
-    const temp = utility.getJsonContent('datasrc/config.json');
-    // console.log(temp);
-    const date = temp["csv_import_data"]? temp["csv_import_data"] : "/";
-    res.send(date);
+   res.status(200).send(updateCSV(req, res, "date"));
 });
 
 const uploadFields = [
@@ -108,7 +102,6 @@ app.post("/googlesheet_function", (req, res) => {
         res.sendStatus(400);
     }
 });
-
 
 
 /**

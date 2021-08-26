@@ -2,7 +2,7 @@ const fs = require('fs');
 
 /** utilitize */
 const getJsonContent = function( filepath = '') {
-    console.log("filepath", filepath);
+    console.log("getJsonContent() - filepath", filepath, fs.existsSync(filepath) );
     console.log("--------");
 
     if (filepath) {
@@ -18,11 +18,11 @@ const getJsonContent = function( filepath = '') {
                     return content ;
                     break;
                 default:
-                    const temp = {};
-                    return temp;
+                    return {};
             }
             
         } catch (error) {
+            console.error("catch error");
             console.error(error);
             // expected output: ReferenceError: nonExistentFunction is not defined
             // Note - error messages will vary depending on browser
@@ -36,10 +36,15 @@ const getJsonContent = function( filepath = '') {
 // overwrite file content (json) with readable space
 function overwriteFileContent(jsonPath, inputString = "", callback = undefined){
     if (jsonPath) {
-        fs.writeFile(jsonPath, inputString, 'utf8', (err) => {
-            if (err) throw err;
-            console.log('The file has been saved!');
-            if (callback) {
+        if (typeof inputString == "object"){
+            inputString = JSON.stringify(inputString, null, 4);
+        }
+        fs.writeFile(jsonPath, inputString, (err) => {
+            if (err) console.log( err);
+            else {
+                console.log('The file has been saved!');
+            }
+            if (typeof callback == "function") {
                 callback(err);
             }
         });

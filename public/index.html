@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Content Template</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- jquery ui -->
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- font awesome -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous"> -->
+    <!-- boostrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col"></div>
+        </div> -->
+        <br>
+        <!-- nav tabs -->
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="normal-tab" data-bs-toggle="tab" data-bs-target="#normal" type="button" role="tab" aria-controls="normal" aria-selected="true">非設計款</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link " id="design-tab" data-bs-toggle="tab" data-bs-target="#design" type="button" role="tab" aria-controls="design" aria-selected="false">設計款</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">Result</button>
+                    </li>
+                </ul>
+                <div class="text-end" style="height: 0;">
+                    <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/uploadcsv.html">  Update CSV  </a>
+                </div>
+            </div>
+        </div>
+        <!-- tab panel -->
+        <div class="row">
+            <div class="col">    
+                <div class="tab-content p-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="normal" role="tabpanel" aria-labelledby="normal-tab"></div>
+                    <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab"></div>
+                    <div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
+                        <button class="btn btn-secondary  btn-sm mb-2" onclick="copyToBoard()">Copy to Clipboard</button>
+                        <textarea id="resultTextarea" class="mb-2"></textarea>
+                        <button class="btn btn-secondary  btn-sm " onclick="copyToBoard()">Copy to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright -->
+        <!-- <footer class="bg-light">
+            <div class="text-center p-3" >
+                © 2021 Copyright: <a class=" text-decoration-none" href="https://github.com/virginiayu/ContentTemplate_IG">Virginia Yu 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </div>
+        </footer> -->
+    </div>
+</body>
+
+<template id="nonDesignTemplate">
+    <form class="form_normal">
+        <!-- grid exist? -->
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="gridItem">Sell On Grid Shop</label>
+            <div class="col-8 col-form-label">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridItem" name="gridItem">
+                </div>
+            </div>
+        </div>
+        <!-- type -->
+        <div class="form-group row">
+            <label for="inputType" class="col-4 col-form-label" >Type <span class="required">*</span></label>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_bracelet" value="手串" checked>
+                    <label class="form-check-label" for="type_bracelet">手串</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_pendant" value="吊墜">
+                    <label class="form-check-label" for="type_pendant">吊墜</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_keychain" value="萬能扣">
+                    <label class="form-check-label" for="type_keychain">萬能扣</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_ring" value="戒指">
+                    <label class="form-check-label" for="type_ring">戒指</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_column" value="晶柱">
+                    <label class="form-check-label" for="type_column">晶柱</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_raw" value="裸石"">
+                    <label class="form-check-label" for="type_raw">裸石</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_silver" value="銀手鏈"">
+                    <label class="form-check-label" for="type_silver">銀手鏈</label>
+                </div>
+            </div>
+        </div>
+        <!-- display method  -->
+        <div class="form-group row">
+            <label for="inputPtdCode" class="col-4 col-form-label">Uniqueness <span class="required">*</span></label>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_one" value="一物一圖" checked>
+                    <label class="form-check-label" for="uniqueness_one">一物一圖</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_random"value="隨機發貨">
+                    <label class="form-check-label" for="uniqueness_random">隨機發貨</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_multi" value="一貼多物">
+                    <label class="form-check-label" for="uniqueness_multi">一貼多物</label>
+                </div>
+            </div>
+        </div>
+        <!-- crystal type -->
+        <div class="form-group row">
+            <label for="name" class="col-4 col-form-label">Crystal Type</label>
+            <div class="col-8">
+                <input class="form-control" id="name" name="name" placeholder="Crystal Type" type="text">
+            </div>
+        </div>
+        <!-- Special Name -->
+        <div class="form-group row">
+            <label for="specialname" class="col-4 col-form-label">Special Name</label>
+            <div class="col-8">
+                <input class="form-control" id="specialname" name="specialname" placeholder="原創形容詞" type="text">
+            </div>
+        </div>
+        <!-- Other Name -->
+        <div class="form-group row">
+            <label for="othername" class="col-4 col-form-label">Nickname</label>
+            <div class="col-8">
+                <input class="form-control" id="othername" name="othername" placeholder="Nickname 補完" type="text">
+            </div>
+        </div>
+        <!-- Sequence No. -->
+        <div class="form-group row">
+            <label for="seqNo" class="col-4 col-form-label">Sequence No.</label>
+            <div class="col-8">
+                <input class="form-control" id="seqNo" name="seqNo" placeholder="Sequence No." type="text">
+            </div>
+        </div>
+        <!-- material check list -->
+        <div class="row">
+            <div class="col">
+                <div class="table-title-row"></div>
+                <table  class="table table-striped" id="materialTable" >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Size (mm)</th>
+                            <th scope="col">Price (HKD)</th>
+                            <th scope="col">Wrist (cm)</th>
+                            <th scope="col">Code</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td><input type="text" class="form-control tableInputText" name="items[0][size]" ></td>
+                            <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
+                            <td><input type="number" class="form-control tableInputText" name="items[0][wrist]" step="0.1"></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[0][code]" ></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td scope="col" colspan="6" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this);">+</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <input type="button" class="btn btn-primary normalSubmitBtn" value=" Submit " />
+        <br><br>
+    </form>
+</template>
+
+<template id="designTemplate">
+    <form class="form_design">
+        <!-- customerise  -->
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="custom">客製化</label>
+            <div class="col-8 col-form-label">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="custom" name="custom">
+                </div>
+            </div>
+        </div>
+        <!-- display method  -->
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="onlyOne">一物一圖</label>
+            <div class="col-8 col-form-label">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"  id="onlyOne" name="onlyOne">
+                </div>
+            </div>
+        </div>
+        <!-- grid exist? -->
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="gridItem2">Sell On Grid Shop</label>
+            <div class="col-8 col-form-label">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridItem2" name="gridItem">
+                </div>
+            </div>
+        </div>
+        <!-- type I -->
+        <div class="form-group row">
+            <label for="inputType" class="col-4 col-form-label" >Type I<span class="required">*</span></label>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_fullball" value="全珠款" checked>
+                    <label class="form-check-label" for="type_fullball">全珠款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_tube" value="彎管款">
+                    <label class="form-check-label" for="type_tube">彎管款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_chain" value="銀鏈款">
+                    <label class="form-check-label" for="type_chain">銀鏈款</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="type" id="type_chain" value="銀鏈款">
+                    <label class="form-check-label" for="type_chain">索帶款</label>
+                </div>
+            </div>
+        </div>
+        <!-- type 2 x design idea -->
+        <div class="form-group row">
+            <label for="inputType" class="col-4 col-form-label" >Type II (Series)<span class="required">*</span></label>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="series" id="type_normal" value="" checked>
+                    <label class="form-check-label" for="type_type_normalfullball">/</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="series" id="type_light" value="輕設計">
+                    <label class="form-check-label" for="type_light">輕設計</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="series" id="type_pearl" value="珍珠系列">
+                    <label class="form-check-label" for="type_pearl">珍珠系列</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="series" id="type_topic" value="主題系列">
+                    <label class="form-check-label" for="type_topic">主題系列</label>
+                </div>
+            </div>
+        </div>
+        <!-- Series name -->
+        <div class="form-group row">
+            <label for="type_topic_input" class="col-4 col-form-label">主題系列名稱</label>
+            <div class="col-8">
+                <input class="form-control" id="type_topic_input" name="serialsName" placeholder="Series Name" type="text"  placeholder="主題系列名">
+            </div>
+        </div>
+        <!-- Item name -->
+        <!-- <div class="form-group row">
+            <label for="specialname" class="col-4 col-form-label">Item Name</label>
+            <div class="col-8">
+                <input class="form-control" id="specialname" name="specialname" placeholder="Special Name" type="text">
+            </div>
+        </div> -->
+        <!-- Ptd Code -->
+        <div class="form-group row">
+            <label for="ptdCode" class="col-4 col-form-label">Code</label>
+            <div class="col-8">
+                <input class="form-control" id="ptdCode" name="ptdCode" placeholder="Product Code" type="text">
+            </div>
+        </div>
+        <!-- Price -->
+        <div class="form-group row">
+            <label for="price" class="col-4 col-form-label">Price</label>
+            <div class="col-8">
+                <input class="form-control" id="price" name="price" placeholder="HKD" type="text">
+            </div>
+        </div>
+        <!-- Wrist -->
+        <div class="form-group row">
+            <label for="ptdCode" class="col-4 col-form-label">Wrist (cm)</label>
+            <div class="col-8">
+                <input class="form-control" id="wrist" name="wrist" placeholder="Display Wrist" type="text">
+            </div>
+        </div>
+        <!-- material check list -->
+        <div class="row">
+            <div class="col">
+                <div class="table-title-row"></div>
+                <table  class="table table-striped" id="materialTable" >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Size (mm)</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td><input type="text" class="form-control tableInputText materialUsed" name="items[0][name]" ></td>
+                            <td><input type="text" class="form-control tableInputText" name="items[0][size]"step="0.1" ></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td scope="col" colspan="4" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this, 'design');">+</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <input type="button" class="btn btn-primary designSubmitBtn " value=" Submit " />
+        <br><br>
+    </form>
+</template>
+
+<!-- jquery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- jquery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<!-- customerize -->
+<script type="text/javascript" src="/js/index.js"></script>
+
+</html>

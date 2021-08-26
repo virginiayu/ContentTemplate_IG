@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding:0;
+    /* border: 0; */
+}
+body, .form-control, .btn{
+    font-size: 0.9rem;
+}
+.container{
+    min-width: 320px;
+}
+.form-group{
+    margin-bottom: .5rem;
+}
+.form-check-label{
+    cursor: pointer;
+}
+.form-control{
+    min-width: 76px;
+}
+.tab-pane.fade:not(.show){
+    height: 0;
+}
+.fade {
+    transition: opacity .15s linear, height .15s;
+}
+.required {
+    color: red;
+}
+.tab-pane textarea{
+    width: 100%;
+    height: 60vh;
+    /* max-height: calc(100vh - 200px); */
+    resize: none;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+#csvBtn {
+    margin-top: -66px;
+}
+form tfoot td {
+    border-bottom: 0;
+}
+.form-check-input[type="checkbox"]{
+    cursor: pointer;
+}

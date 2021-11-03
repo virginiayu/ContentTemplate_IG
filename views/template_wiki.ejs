@@ -1,0 +1,19 @@
+[#lgw_小百科] #<%= name %>
+.
+相關商品：👉🏻 #lgw_<%= name %>
+.
+<%= description_long? description_long : "" %>
+.
+#水晶手鏈 #水晶手鍊 #水晶手串
+<%
+    if (name) {
+    %>#<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串<% 
+    } 
+    
+    if (nickname.length > 0) {
+        for(var i=0; i<nickname.length; i++) {
+            %>#<%= nickname[i] %>手鏈 #<%= nickname[i] %>手鍊 #<%= nickname[i] %>
+    <%  }
+    }
+
+%>

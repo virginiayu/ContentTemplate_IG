@@ -1,0 +1,126 @@
+<form class="form_normal">
+    <!-- grid exist? -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="gridItem">Sell On Grid Shop</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridItem" name="gridItem">
+            </div>
+        </div>
+    </div>
+    <!-- type -->
+    <div class="form-group row">
+        <label for="inputType" class="col-4 col-form-label" >Type <span class="required">*</span></label>
+        <div class="col-8">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_bracelet" value="手串" checked>
+                <label class="form-check-label" for="type_bracelet">手串</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_pendant" value="吊墜">
+                <label class="form-check-label" for="type_pendant">吊墜</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_keychain" value="萬能扣">
+                <label class="form-check-label" for="type_keychain">萬能扣</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_ring" value="戒指">
+                <label class="form-check-label" for="type_ring">戒指</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_column" value="晶柱">
+                <label class="form-check-label" for="type_column">晶柱</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_raw" value="裸石"">
+                <label class="form-check-label" for="type_raw">裸石</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_silver" value="銀手鏈"">
+                <label class="form-check-label" for="type_silver">銀手鏈</label>
+            </div>
+        </div>
+    </div>
+    <!-- display method  -->
+    <div class="form-group row">
+        <label for="inputPtdCode" class="col-4 col-form-label">Uniqueness <span class="required">*</span></label>
+        <div class="col-8">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_one" value="一物一圖" checked>
+                <label class="form-check-label" for="uniqueness_one">一物一圖</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_random"value="隨機發貨">
+                <label class="form-check-label" for="uniqueness_random">隨機發貨</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="uniqueness" id="uniqueness_multi" value="一貼多物">
+                <label class="form-check-label" for="uniqueness_multi">一貼多物</label>
+            </div>
+        </div>
+    </div>
+    <!-- crystal type -->
+    <div class="form-group row">
+        <label for="name" class="col-4 col-form-label">Crystal Type</label>
+        <div class="col-8">
+            <input class="form-control" id="name" name="name" placeholder="Crystal Type" type="text">
+        </div>
+    </div>
+    <!-- Special Name -->
+    <div class="form-group row">
+        <label for="specialname" class="col-4 col-form-label">Special Title </label>
+        <div class="col-8">
+            <input class="form-control" id="specialname" name="specialname" placeholder="原創形容詞" type="text">
+        </div>
+    </div>
+    <!-- Other Name -->
+    <div class="form-group row">
+        <label for="othername" class="col-4 col-form-label">Nickname (hashtag)</label>
+        <div class="col-8">
+            <input class="form-control" id="othername" name="othername" placeholder="Nickname 補完" type="text">
+        </div>
+    </div>
+    <!-- Sequence No. -->
+    <div class="form-group row">
+        <label for="seqNo" class="col-4 col-form-label">Sequence No.</label>
+        <div class="col-8">
+            <input class="form-control" id="seqNo" name="seqNo" placeholder="Sequence No." type="text">
+        </div>
+    </div>
+    <!-- material check list -->
+    <div class="row">
+        <div class="col">
+            <div class="table-title-row"></div>
+            <table  class="table table-striped" id="materialTable" >
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Size (mm)</th>
+                        <th scope="col">Price (HKD)</th>
+                        <th scope="col">Wrist (cm)</th>
+                        <th scope="col">Code</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td><input type="text" class="form-control tableInputText" name="items[0][size]" ></td>
+                        <td><input type="number" class="form-control tableInputText" name="items[0][price]" ></td>
+                        <td><input type="number" class="form-control tableInputText" name="items[0][wrist]" step="0.1"></td>
+                        <td><input type="text" class="form-control tableInputText" name="items[0][code]" ></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td scope="col" colspan="6" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this);">+</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <input type="button" class="btn btn-primary normalSubmitBtn" value=" Submit " />
+    <br><br>
+</form>

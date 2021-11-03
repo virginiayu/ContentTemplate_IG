@@ -11,7 +11,7 @@ $( document ).ready(function() {
             processData: false,
             contentType: false, //  "multipart/form-data", //false,
             success : function(res){
-                console.log('response', res);
+                // console.log('response', res);
                 if (res.status === "success" && res.data) {
                     $("#lastImportTime").html(res.data);
                 }
@@ -25,6 +25,7 @@ $( document ).ready(function() {
     });
 
     $("#updateBySheet").click(function(e){
+        $("#msgDiv_func").val('');
         $.ajax({
             url: "/googlesheet_function",
             type: "post",

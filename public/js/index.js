@@ -1,7 +1,11 @@
 $( document ).ready(function() {
     // bind template html
-    $("#normal").html($("#nonDesignTemplate").html());
-    $("#design").html($("#designTemplate").html());
+    // $("#normal").html($("#nonDesignTemplate").html());
+    // $("#design").html($("#designTemplate").html());
+    // $("#wiki").html($("#wikiTemplate").html());
+    $("#normal").load('form_normal.html');
+    $("#design").load('form_design.html');
+    $("#wiki").load('form_wiki.html');
 
     bindAutoComplete();
 
@@ -24,8 +28,40 @@ $( document ).ready(function() {
             },
         "json");
     });
+    $('.wikiSubmitBtn').on('click', function(e){
+        $.post( 
+            '/submit_wiki_form', 
+            $('.form_wiki').serializeArray(), 
+            function(res){
+                ajaxSuccess(res);
+            },
+        "json");
+    });
   
 });
+
+function bindAutoComplete(){
+    // bind auto complete 
+    $.getJSON('/crystaltypelist', function(data) {
+    // $.getJSON('data/namelist.json', function(data) {
+        // JSON result in `data` variable
+        $( "#normal #name, #design .materialUsed, #wiki #name" ).autocomplete({
+            source: data,
+        });
+    });
+}
+
+
+function formWikiSubmit () {
+    $.post( 
+        '/submit_wiki_form', 
+        $('.form_wiki').serializeArray(), 
+        function(res){
+            ajaxSuccess(res);
+        },
+    "json");
+}
+
 
 function ajaxSuccess (res){
     if(res) {
@@ -36,17 +72,6 @@ function ajaxSuccess (res){
         // $("#resultTextarea").html("");
         alert("empty response");
     }
-}
-
-function bindAutoComplete(){
-    // bind auto complete 
-    $.getJSON('/crystaltypelist', function(data) {
-    // $.getJSON('data/namelist.json', function(data) {
-        // JSON result in `data` variable
-        $( "#normal #name, #design .materialUsed" ).autocomplete({
-            source: data,
-        });
-    });
 }
 
 function copyToBoard(){

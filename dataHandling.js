@@ -38,6 +38,10 @@ function dataHandling(resQuery, type='normal'){
             // console.log("processed data: ", data);
             result = getTemplateResult(data, 'views/template_design.ejs');
             break; 
+        case 'wiki':
+            data = data_processer_wiki(query);
+            result = getTemplateResult(data, 'views/template_wiki.ejs');
+            break; 
     }
 
     return result;
@@ -140,7 +144,7 @@ function data_processer_design(params){
         let shortDesc = [];
         if (fs.existsSync(filepath)) {
             const json = utility.getJsonContent(filepath);
-            console.log();
+            // console.log();
             shortDesc = json.filter( it => relatedTags.indexOf(it.name) > -1 );  
             temp = shortDesc.map(function(item, ind){
                 item.nickname = item.nickname.split(",");
@@ -169,10 +173,43 @@ function data_processer_design(params){
     return params;
 }
 
+function data_processer_wiki(params){
+    console.log("wiki params", params);
+    if (params) {
+        // filter useful description from src
+        const filepath = _jsonPath_detail;
+        let desc = [];
+
+        if (fs.existsSync(filepath)) {
+            const json = utility.getJsonContent(filepath);
+            desc = json.filter( (it) => it.name === params.name );
+
+            if (desc.length > 0){
+                desc =  desc[0];
+                if (desc.nickname) {
+                    let temp = desc.nickname.split(",");
+                    desc.nickname = temp;
+                }
+            }
+
+            console.log('desc', desc);  
+            return desc;
+        }
+        else {
+            console.log("filepath not exist", filepath);
+        }
+    }
+    else {
+        console.log("missing params @data_processer_wiki()");
+    }
+    return params;
+}
 
 /** bind template */
 function getTemplateResult(data, filepath = ''){
     let html = "";
+    // console.log('data', data);
+
     if (Object.keys(data).length > 0 && filepath) {
         // bind template
         const templatePath = path.join(__dirname, filepath);
@@ -182,6 +219,7 @@ function getTemplateResult(data, filepath = ''){
         // return plain text
         let template = fs.readFileSync(templatePath, 'utf-8');
         html = ejs.render(template, data);
+
     }
 
     return {"data" : html};

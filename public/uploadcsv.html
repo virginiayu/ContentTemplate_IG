@@ -20,6 +20,13 @@
         #csvPath{
             width: 100%;
         }
+
+        h5 {
+            display: inline-block;
+        }
+        #csvBtn {
+            float: right;
+        }
     </style>
 </head>
 
@@ -28,35 +35,41 @@
     <div class="row">
         <div class="col">
             <br>
-            <h4>Update CSV</h4>
-            <div class="text-end" style="height: 0;">
+            <!-- <h4>Update CSV</h4> -->
+            <!-- <div class="text-end" style="height: 6px;">
                 <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/"> Back to Home </a>
-            </div>
-            <hr>            
+            </div> -->
+            <!-- <hr>             -->
         </div>
     </div>
     <div class="row">
         <div class="col">
             <div class="row">
-                <h5>Update Function Details</h5> 
-                <small class="text-secondary mb-2">Last Success Import: <span id="lastImportTime"></span></small> <!-- 0000-00-00T00:00:00Z -->
-                <small id="msgDiv_func" class=" mb-2"></small>
+                <div class="col">
+                    <div>
+                        <h5>Update Function Details</h5> 
+                        <a class="btn  btn-outline-secondary btn-sm float-right" id="csvBtn" href="/"> Back to Home </a>
+                    </div>
+                    <small class="text-secondary mb-2">Last Success Import: <span id="lastImportTime"></span></small> <!-- 0000-00-00T00:00:00Z -->
+                    <hr>
+                </div>
             </div>
             <div class="">
                 <button class="btn  btn-primary" id="updateBySheet">By Google Sheet</button >
+                <br>
+                <small id="msgDiv_func" class="required mb-2"></small>
             </div>
-            <div class="form-group row"><div class="col-12 mt-2">OR</div></div>
+            <!-- <div class="form-group row"><div class="col-12 mt-2">OR</div></div>
             <form id="form_upload">
                 <div class="form-group row">
-                    <!-- <label class="col-12 col-form-label">Import By CSV File</label> -->
                     <div class="col-12"><input type="file" accept=".csv" name="csvFile" class="form-control" /></div>
                 </div>
                 <div class="" >
                     <input type="submit" class="btn btn-primary mt-2" value=" By File Upload " style="margin-right: 8px;" />
                     <button class="btn  btn-outline-secondary mt-2" id="reset" type="reset">Reset</button >
                 </div>
-            </form>
-            <hr>
+            </form> -->
+            <!-- <hr> -->
         </div>
     </div>
 </div>

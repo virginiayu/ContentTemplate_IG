@@ -1,0 +1,139 @@
+<form class="form_design">
+    <!-- customerise  -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="custom">客製化</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="custom" name="custom">
+            </div>
+        </div>
+    </div>
+    <!-- display method  -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="onlyOne">一物一圖</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"  id="onlyOne" name="onlyOne">
+            </div>
+        </div>
+    </div>
+    <!-- grid exist? -->
+    <div class="form-group row">
+        <label class="col-4 col-form-label" for="gridItem2">Sell On Grid Shop</label>
+        <div class="col-8 col-form-label">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridItem2" name="gridItem">
+            </div>
+        </div>
+    </div>
+    <!-- type I -->
+    <div class="form-group row">
+        <label for="inputType" class="col-4 col-form-label" >Type I<span class="required">*</span></label>
+        <div class="col-8">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_fullball" value="全珠款" checked>
+                <label class="form-check-label" for="type_fullball">全珠款</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_tube" value="彎管款">
+                <label class="form-check-label" for="type_tube">彎管款</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_chain" value="銀鏈款">
+                <label class="form-check-label" for="type_chain">銀鏈款</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="type_chain" value="銀鏈款">
+                <label class="form-check-label" for="type_chain">索帶款</label>
+            </div>
+        </div>
+    </div>
+    <!-- type 2 x design idea -->
+    <div class="form-group row">
+        <label for="inputType" class="col-4 col-form-label" >Type II (Series)<span class="required">*</span></label>
+        <div class="col-8">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="series" id="type_normal" value="" checked>
+                <label class="form-check-label" for="type_type_normalfullball">/</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="series" id="type_light" value="輕設計">
+                <label class="form-check-label" for="type_light">輕設計</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="series" id="type_pearl" value="珍珠系列">
+                <label class="form-check-label" for="type_pearl">珍珠系列</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="series" id="type_topic" value="主題系列">
+                <label class="form-check-label" for="type_topic">主題系列</label>
+            </div>
+        </div>
+    </div>
+    <!-- Series name -->
+    <div class="form-group row">
+        <label for="type_topic_input" class="col-4 col-form-label">主題系列名稱</label>
+        <div class="col-8">
+            <input class="form-control" id="type_topic_input" name="serialsName" placeholder="Series Name" type="text"  placeholder="主題系列名">
+        </div>
+    </div>
+    <!-- Item name -->
+    <!-- <div class="form-group row">
+        <label for="specialname" class="col-4 col-form-label">Item Name</label>
+        <div class="col-8">
+            <input class="form-control" id="specialname" name="specialname" placeholder="Special Name" type="text">
+        </div>
+    </div> -->
+    <!-- Ptd Code -->
+    <div class="form-group row">
+        <label for="ptdCode" class="col-4 col-form-label">Code</label>
+        <div class="col-8">
+            <input class="form-control" id="ptdCode" name="ptdCode" placeholder="Product Code" type="text">
+        </div>
+    </div>
+    <!-- Price -->
+    <div class="form-group row">
+        <label for="price" class="col-4 col-form-label">Price</label>
+        <div class="col-8">
+            <input class="form-control" id="price" name="price" placeholder="HKD" type="text">
+        </div>
+    </div>
+    <!-- Wrist -->
+    <div class="form-group row">
+        <label for="ptdCode" class="col-4 col-form-label">Wrist (cm)</label>
+        <div class="col-8">
+            <input class="form-control" id="wrist" name="wrist" placeholder="Display Wrist" type="text">
+        </div>
+    </div>
+    <!-- material check list -->
+    <div class="row">
+        <div class="col">
+            <div class="table-title-row"></div>
+            <table  class="table table-striped" id="materialTable" >
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Size (mm)</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td><input type="text" class="form-control tableInputText materialUsed" name="items[0][name]" ></td>
+                        <td><input type="text" class="form-control tableInputText" name="items[0][size]"step="0.1" ></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td scope="col" colspan="4" ><button type="button"  class="btn btn-outline-secondary btn0sm cleanRowBtn" onclick="addRow(this, 'design');">+</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <input type="button" class="btn btn-primary designSubmitBtn " value=" Submit " />
+    <br><br>
+</form>

@@ -74,6 +74,15 @@ app.post("/submit_design_form", function(req, res) {
     
     res.json(result);
 });
+// for wiki form submission
+app.post("/submit_wiki_form", function(req, res) {
+    let query = req.body; // req.query;
+    
+    // data process
+    let result = dataHandling(query, 'wiki');
+    
+    res.json(result);
+});
 
 
 /** for uploadcsv.html */

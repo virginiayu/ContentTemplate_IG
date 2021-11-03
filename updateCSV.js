@@ -25,7 +25,7 @@ function updateCSV(req, res, type="") {
             // res.send(json);
         })
         .catch(function (err) {
-            console.log('Error: ', err);
+            console.error('Error: ', err);
         });
     }
     else if (type == "date"){
@@ -168,7 +168,7 @@ async function readGoogleSheets(){
         return getRows.data;
     }
     catch (err) {
-        console.log("catch", err);
+        console.error("catch", err);
     }
 }
 
@@ -206,7 +206,9 @@ function writeSheetsToDataSrc (res, jsonAry){
         };
         utility.overwriteFileContent(_jsonPath_detail, jsonAry, callback);
     }
-    console.log("Empty json array", jsonAry);
+    else {
+        console.log("Empty json array", jsonAry);
+    }
 }
 
 

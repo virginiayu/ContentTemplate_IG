@@ -38,7 +38,8 @@ body, .form-control, .btn{
     /* text-decoration: underline; */
 }
 #csvBtn {
-    margin-top: -66px;
+    margin-bottom: 8px;
+    font-size: 12px;
 }
 form tfoot td {
     border-bottom: 0;

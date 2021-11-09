@@ -1,21 +1,27 @@
-[On Sale] [<%= uniqueness %>] #<%= (specialname)? specialname : name  %> <%= type %> <%= seqNo %>
+[On Sale] [<%= uniqueness %>] #<%= specialname? specialname : name  %> <%= type %> <%= seqNo %>
 .
-<% items.forEach(function(item){ 
+<% 
+items.forEach(function(item){ 
     if (item.code)  { %>
-        <%= item.code %><% } 
+        <%= item.code %><% 
+    } 
     if (item.wrist) { %>
-        手圍 <%= item.wrist %>cm<% } 
+        手圍 <%= item.wrist %>cm<% 
+    } 
     if (item.size)  { %>
-        尺寸 <%= item.size %>mm<% } 
+        尺寸 <%= item.size %>mm<% 
+        } 
     if (item.price) { %>
-        HKD $<%= item.price %><% }
-}) %>
+        HKD $<%= item.price %><% 
+    }
+}); %>
 可免費改手圍（下單時請揚聲）
 .
-功效 : 
-<%= description_short %>
+<%= description_short? "功效 : " +  description_short :"" %>
 .
-相關商品：👉🏻 <%= (specialname? "#lgw_"+specialname+"," : "")  "#lgw_"+name %>
+相關商品：
+👉🏻 #lgw_<%= name %>
+<%= (specialname? " 👉🏻 #lgw_"+specialname+"," : "") %>
 .
 自然光拍攝
 DM下單
@@ -23,8 +29,12 @@ DM下單
 .
 #水晶手鏈 #水晶手鍊 #水晶手串
 <%
-    if (specialname) {%>#<%= specialname %>手鏈 #<%= specialname %>手鍊 #<%= specialname %>手串<% } 
-    if (name) {%>#<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串<% } 
+if (specialname) {
+    %>#<%= specialname %>手鏈 #<%= specialname %>手鍊 #<%= specialname %>手串<%
+} 
+if (name) {
+%>#<%= name %>手鏈 #<%= name %>手鍊 #<%= name %>手串<% 
+} 
     for(var i=0; i<nickname.length; i++) {
         %>#<%= nickname[i] %>手鏈 #<%= nickname[i] %>手鍊 #<%= nickname[i] %><%= type %>
 <%  } %>

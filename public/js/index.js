@@ -7,37 +7,9 @@ $( document ).ready(function() {
     $("#design").load('form_design.html');
     $("#wiki").load('form_wiki.html');
 
+    // bind auto complete
     bindAutoComplete();
 
-    //form submit handling
-    $('.normalSubmitBtn').on('click', function(e){
-        $.post( 
-            '/submit_normal_form', 
-            $('.form_normal').serializeArray(), 
-            function(res){
-                ajaxSuccess(res);
-            },
-        "json");
-    });
-    $('.designSubmitBtn').on('click', function(e){
-        $.post( 
-            '/submit_design_form', 
-            $('.form_design').serializeArray(), 
-            function(res){
-                ajaxSuccess(res);
-            },
-        "json");
-    });
-    $('.wikiSubmitBtn').on('click', function(e){
-        $.post( 
-            '/submit_wiki_form', 
-            $('.form_wiki').serializeArray(), 
-            function(res){
-                ajaxSuccess(res);
-            },
-        "json");
-    });
-  
 });
 
 function bindAutoComplete(){
@@ -51,6 +23,25 @@ function bindAutoComplete(){
     });
 }
 
+function formNormalSubmit() {
+    $.post( 
+        '/submit_normal_form', 
+        $('.form_normal').serializeArray(), 
+        function(res){
+            ajaxSuccess(res);
+        },
+    "json");
+}
+
+function formDesignSubmit() {
+    $.post( 
+        '/submit_design_form', 
+        $('.form_design').serializeArray(), 
+        function(res){
+            ajaxSuccess(res);
+        },
+    "json");
+}
 
 function formWikiSubmit () {
     $.post( 

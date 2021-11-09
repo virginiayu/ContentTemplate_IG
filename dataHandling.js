@@ -49,6 +49,7 @@ function dataHandling(resQuery, type='normal'){
 
 /** data proocessing */ 
 function data_processer_normal(params){
+    console.log("params", params);
     if(params.items){
         let temp = params.items.map(function(item, ind){
             if (item.size || item.price ) return item;
